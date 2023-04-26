@@ -156,7 +156,85 @@ NOMBRES:	MOVLW a'P'
 
 DECIMAL:	GOTO LOOP_P
 HEXADECIMAL:GOTO LOOP_P
+HEXADECIMAL:
+			MOVF PORTD,W
+			MOVWF regaux2
+			MOVF regaux2,W	;restauramos el valor guardado por si acaso sufriese algun cambio
+			ANDLW 0xF0		;extraemos la parte alta
+			MOVWF regaux	;regaux <- W
+			RRF regaux,f
+			RRF regaux,f
+			RRF regaux,f
+			RRF regaux,f	;convertida en parte baja
+			CALL CONVERHEXA
+			MOVF regaux2,W	;restauramos el valor guardado por si acaso sufriese algun cambio
+			ANDLW 0x0F		;extraemos la parte BAJA
+			MOVWF regaux	;regaux <- W
+			CALL CONVERHEXA
+HOLD_HEX:	MOVF PORTE,W		;FUNCION PARA RETENER EL RESULTADO EN LCD
+			SUBLW 0x02 ;  W<--W-0x30
+			BTFSC STATUS,Z  ;¿(CONTA)=0X20?
+			GOTO HOLD_HEX	;SI			
+			MOVLW 0x01		;NO, Limpia Display
+			CALL COMANDO
+			MOVLW 0x80		;regresa a inicio linea 1
+			CALL COMANDO
+			GOTO LOOP_P	
+CONVERHEXA:		MOVF regaux,W	; W<- (regaux)
+			ANDLW 15			;W <-- W&00001111, el cuarto bit siempre está activo para las letras
+			ADDWF PCL,F		;(PCL)<-- (PCL)+W
+			GOTO CASO0		;PC+0	Caso 0000: Numero 0
+			GOTO CASO1		;PC+1	Caso 0001: Numero 1
+			GOTO CASO2		;PC+2	Caso 0010: Numero 2
+			GOTO CASO3		;PC+3	Caso 0011: Numero 3
+			GOTO CASO4		;PC+4	Caso 0100: Numero 4
+			GOTO CASO5		;PC+5	Caso 0101: Numero 5
+			GOTO CASO6		;PC+6	Caso 0110: Numero 6
+			GOTO CASO7		;PC+7 	Caso 0111: Numero 7
+			GOTO CASO8		;PC+8	Caso 1000: Numero 8
+			GOTO CASO9		;PC+9	Caso 1001: Numero 9
+			GOTO CASOA		;PC+10	Caso 1010: Letra A 
+			GOTO CASOB		;PC+11	Caso 1011: Letra B 
+			GOTO CASOC		;PC+12	Caso 1100: Letra C 
+			GOTO CASOD		;PC+13	Caso 1101: Letra D 
+			GOTO CASOE		;PC+14	Caso 1110: Letra E 
+			GOTO CASOF		;PC+15	Caso 1111: Letra F 
+CASO0:			MOVLW a'0'
+			GOTO CONVEND
+CASO1:			MOVLW a'1'
+			GOTO CONVEND
+CASO2:			MOVLW a'2'
+			GOTO CONVEND
+CASO3:			MOVLW a'3'
+			GOTO CONVEND
+CASO4:			MOVLW a'4'
+			GOTO CONVEND
+CASO5:			MOVLW a'5'
+			GOTO CONVEND
+CASO6:			MOVLW a'6'
+			GOTO CONVEND
+CASO7:			MOVLW a'7'
+			GOTO CONVEND
+CASO8:			MOVLW a'8'
+			GOTO CONVEND
+CASO9:			MOVLW a'9'
+			GOTO CONVEND
+CASOA:			MOVLW a'A'
+			GOTO CONVEND
+CASOB:			MOVLW a'B'
+			GOTO CONVEND
+CASOC:			MOVLW a'C'
+			GOTO CONVEND
+CASOD:			MOVLW a'D'
+			GOTO CONVEND
+CASOE:			MOVLW a'E'
+			GOTO CONVEND
+CASOF:			MOVLW a'F'
+			GOTO CONVEND
 
+CONVEND:		CALL DATOS		; Imprimimos el simbolo en el LCD
+			CLRF W
+			RETURN
 BINARIO:	BTFSC PORTD,7
 			CALL ES_UNO
 			BTFSS PORTD,7
