@@ -155,8 +155,8 @@ NOMBRES:	MOVLW a'P'
 			GOTO LOOP_P
 
 DECIMAL:	GOTO LOOP_P
-HEXADECIMAL:GOTO LOOP_P
 HEXADECIMAL:
+			CLRF W
 			MOVF PORTD,W
 			MOVWF regaux2
 			MOVF regaux2,W	;restauramos el valor guardado por si acaso sufriese algun cambio
@@ -179,9 +179,10 @@ HOLD_HEX:	MOVF PORTE,W		;FUNCION PARA RETENER EL RESULTADO EN LCD
 			CALL COMANDO
 			MOVLW 0x80		;regresa a inicio linea 1
 			CALL COMANDO
+			CLRF W
 			GOTO LOOP_P	
 CONVERHEXA:		MOVF regaux,W	; W<- (regaux)
-			ANDLW 15			;W <-- W&00001111, el cuarto bit siempre está activo para las letras
+			;ANDLW 15			;W <-- W&00001111, el cuarto bit siempre está activo para las letras
 			ADDWF PCL,F		;(PCL)<-- (PCL)+W
 			GOTO CASO0		;PC+0	Caso 0000: Numero 0
 			GOTO CASO1		;PC+1	Caso 0001: Numero 1
@@ -199,40 +200,40 @@ CONVERHEXA:		MOVF regaux,W	; W<- (regaux)
 			GOTO CASOD		;PC+13	Caso 1101: Letra D 
 			GOTO CASOE		;PC+14	Caso 1110: Letra E 
 			GOTO CASOF		;PC+15	Caso 1111: Letra F 
-CASO0:			MOVLW a'0'
+CASO0:		MOVLW a'0'
 			GOTO CONVEND
-CASO1:			MOVLW a'1'
+CASO1:		MOVLW a'1'
 			GOTO CONVEND
-CASO2:			MOVLW a'2'
+CASO2:		MOVLW a'2'
 			GOTO CONVEND
-CASO3:			MOVLW a'3'
+CASO3:		MOVLW a'3'
 			GOTO CONVEND
-CASO4:			MOVLW a'4'
+CASO4:		MOVLW a'4'
 			GOTO CONVEND
-CASO5:			MOVLW a'5'
+CASO5:		MOVLW a'5'
 			GOTO CONVEND
-CASO6:			MOVLW a'6'
+CASO6:		MOVLW a'6'
 			GOTO CONVEND
-CASO7:			MOVLW a'7'
+CASO7:		MOVLW a'7'
 			GOTO CONVEND
-CASO8:			MOVLW a'8'
+CASO8:		MOVLW a'8'
 			GOTO CONVEND
-CASO9:			MOVLW a'9'
+CASO9:		MOVLW a'9'
 			GOTO CONVEND
-CASOA:			MOVLW a'A'
+CASOA:		MOVLW a'A'
 			GOTO CONVEND
-CASOB:			MOVLW a'B'
+CASOB:		MOVLW a'B'
 			GOTO CONVEND
-CASOC:			MOVLW a'C'
+CASOC:		MOVLW a'C'
 			GOTO CONVEND
-CASOD:			MOVLW a'D'
+CASOD:		MOVLW a'D'
 			GOTO CONVEND
-CASOE:			MOVLW a'E'
+CASOE:		MOVLW a'E'
 			GOTO CONVEND
-CASOF:			MOVLW a'F'
+CASOF:		MOVLW a'F'
 			GOTO CONVEND
 
-CONVEND:		CALL DATOS		; Imprimimos el simbolo en el LCD
+CONVEND:	CALL DATOS		; Imprimimos el simbolo en el LCD
 			CLRF W
 			RETURN
 BINARIO:	BTFSC PORTD,7
@@ -268,13 +269,14 @@ BINARIO:	BTFSC PORTD,7
 			BTFSS PORTD,0
 			CALL ES_CERO
 HOLD_BIN:	MOVF PORTE,W
-			SUBLW 0x03 ;  W<--W-0x30
-			BTFSC STATUS,Z  ;?(CONTA)=0X30?
+			SUBLW 0x03 ;  W<--W-0x03
+			BTFSC STATUS,Z  ;¿(CONTA)=0x03?
 			GOTO HOLD_BIN ;SI			
 			MOVLW 0x01		;Limpia Display
 			CALL COMANDO
 			MOVLW 0x80		;regresa a inicio linea 1
 			CALL COMANDO
+			CLRF W
 			GOTO LOOP_P		
 ES_UNO:		MOVLW a'1'
 			CALL DATOS
