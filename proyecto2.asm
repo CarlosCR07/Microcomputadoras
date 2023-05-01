@@ -1,9 +1,15 @@
 		PROCESSOR 16F877
 		INCLUDE <P16F877.INC>
 		
-valor	equ h'20'		;Registros auxiliares para rutina de retardo
+valor	equ h'20'			;Registros auxiliares para rutina de retardo
 valor1	equ h'21'
 valor2	equ h'22'
+contadorCentesima equ h'23'	;Registros auxiliares para conversión Hexa - Decimal
+contadorDecima equ h'24'
+contadorUnidad equ h'25'
+aux equ h'28'
+regaux equ h'26'			;Registros auxiliares para visualizar en Hexadecimal
+regaux2 equ h'27'
 
 			ORG 0 ;Vector de reset
 			GOTO INICIO
@@ -37,9 +43,9 @@ LOOP_P:		MOVF PORTE,W	;W<-- (PORTE)
 			ANDLW 7			;W <-- W&00000111
 			ADDWF PCL,F		;(PCL)<-- (PCL)+W
 			GOTO NOMBRES	;PC+0	-> Switches: 000
-			GOTO DECIMAL	;PC+1	-> Switches: 001	Conversi?n entrada dipswitch de 8 bits a decimal
-			GOTO HEXADECIMAL;PC+2	-> Switches: 010	Conversi?n entrada dipswitch de 8 bits a hexadecimal
-			GOTO BINARIO	;PC+3	-> Switches: 011	Conversi?n entrada dipswitch de 8 bits a binario
+			GOTO DECIMAL	;PC+1	-> Switches: 001	Conversión entrada dipswitch de 8 bits a decimal
+			GOTO HEXADECIMAL;PC+2	-> Switches: 010	Conversión entrada dipswitch de 8 bits a hexadecimal
+			GOTO BINARIO	;PC+3	-> Switches: 011	Conversión entrada dipswitch de 8 bits a binario
 			GOTO CARACTER	;PC+4	-> Switches: 100	
 			GOTO DEFAULT	;PC+5	-> Switches: 101
 			GOTO DEFAULT	;PC+6 -> Switches: 110
@@ -154,8 +160,62 @@ NOMBRES:	MOVLW a'P'
 			CALL COMANDO
 			GOTO LOOP_P
 
-DECIMAL:	GOTO LOOP_P
-HEXADECIMAL:
+DECIMAL:	CLRF contadorCentesima		;Inicializa en 0
+			CLRF contadorDecima			;Inicializa en 0
+			CLRF contadorUnidad			;Inicializa en 0
+			MOVLW a'D'
+			CALL DATOS
+			MOVLW 0x3A		;Dos puntos
+			CALL DATOS
+			MOVF PORTD,W	;Leer el valor de los switches y lo almacena en aux
+			MOVWF aux	
+	
+LOOP_Centesimas:MOVLW 0x64				;Restar 100
+				SUBWF aux
+				BTFSC STATUS,C			;Verifica el estado de carry
+				GOTO CentesimaEncontrada	;SI hay carry, el resultado es un número positivo				
+				MOVLW 0x64
+				ADDWF aux 					;NO hay carry, entonces recuperar residuo
+LOOP_Decimas:	MOVLW 0x0A
+				SUBWF aux				;Restar 10
+				BTFSC STATUS,C			;Verifica el estado de carry
+				GOTO DecimaEncontrada		;SI hay carry, el resultado es un número positivo
+				MOVLW 0x0A
+				ADDWF aux 					;NO hay carry, entonces recuperar residuo = Unidades
+				MOVF aux,w
+				MOVWF contadorUnidad	;Guardar en contador
+
+MostrarDigitos:	MOVF contadorCentesima,W	
+				ADDLW 0x30					;Obtener valor ASCII
+				CALL DATOS					;Display Centesimas
+				MOVF contadorDecima,W		
+				ADDLW 0x30					;Obtener valor ASCII
+				CALL DATOS					;Display Decimas
+				MOVF contadorUnidad,W		
+				ADDLW 0x30					;Obtener valor ASCII
+				CALL DATOS					;Display Unidades
+
+HOLD_DECIMAL:	MOVF PORTE,W
+				SUBLW 0x01 		;W<--W-0x10
+				BTFSC STATUS,Z  	;¿(CONTA)=0X10?
+				GOTO HOLD_DECIMAL 		;SI			
+				MOVLW 0x01				;NO, Limpia Display
+				CALL COMANDO
+				MOVLW 0x80			;regresa a inicio linea 1
+				CALL COMANDO
+				CLRF W
+				GOTO LOOP_P	
+
+CentesimaEncontrada:INCF contadorCentesima
+					GOTO LOOP_Centesimas
+
+DecimaEncontrada:	INCF contadorDecima	
+					GOTO LOOP_Decimas
+
+HEXADECIMAL:MOVLW a'H'
+			CALL DATOS
+			MOVLW 0x3A		;Dos puntos
+			CALL DATOS
 			CLRF W
 			MOVF PORTD,W
 			MOVWF regaux2
@@ -173,7 +233,7 @@ HEXADECIMAL:
 			CALL CONVERHEXA
 HOLD_HEX:	MOVF PORTE,W		;FUNCION PARA RETENER EL RESULTADO EN LCD
 			SUBLW 0x02 ;  W<--W-0x30
-			BTFSC STATUS,Z  ;Â¿(CONTA)=0X20?
+			BTFSC STATUS,Z  ;¿(CONTA)=0X20?
 			GOTO HOLD_HEX	;SI			
 			MOVLW 0x01		;NO, Limpia Display
 			CALL COMANDO
@@ -181,8 +241,8 @@ HOLD_HEX:	MOVF PORTE,W		;FUNCION PARA RETENER EL RESULTADO EN LCD
 			CALL COMANDO
 			CLRF W
 			GOTO LOOP_P	
-CONVERHEXA:		MOVF regaux,W	; W<- (regaux)
-			;ANDLW 15			;W <-- W&00001111, el cuarto bit siempre estÃ¡ activo para las letras
+CONVERHEXA:	MOVF regaux,W	; W<- (regaux)
+			;ANDLW 15			;W <-- W&00001111, el cuarto bit siempre está activo para las letras
 			ADDWF PCL,F		;(PCL)<-- (PCL)+W
 			GOTO CASO0		;PC+0	Caso 0000: Numero 0
 			GOTO CASO1		;PC+1	Caso 0001: Numero 1
@@ -236,7 +296,12 @@ CASOF:		MOVLW a'F'
 CONVEND:	CALL DATOS		; Imprimimos el simbolo en el LCD
 			CLRF W
 			RETURN
-BINARIO:	BTFSC PORTD,7
+
+BINARIO:	MOVLW a'B'
+			CALL DATOS
+			MOVLW 0x3A		;Dos puntos
+			CALL DATOS
+			BTFSC PORTD,7
 			CALL ES_UNO
 			BTFSS PORTD,7
 			CALL ES_CERO
@@ -269,8 +334,8 @@ BINARIO:	BTFSC PORTD,7
 			BTFSS PORTD,0
 			CALL ES_CERO
 HOLD_BIN:	MOVF PORTE,W
-			SUBLW 0x03 ;  W<--W-0x03
-			BTFSC STATUS,Z  ;Â¿(CONTA)=0x03?
+			SUBLW 0x03 ;  W<--W-0x30
+			BTFSC STATUS,Z  ;¿(CONTA)=0X30?
 			GOTO HOLD_BIN ;SI			
 			MOVLW 0x01		;Limpia Display
 			CALL COMANDO
@@ -333,12 +398,18 @@ CARACTER:	MOVLW 0X40 ;ALMACENAR CARACTERES EN CGRAM
 			MOVLW 0X01
 			CALL DATOS ;CUADRO 1 - SONRISA
 
-			;REGRESA AL LOOP
-			GOTO LOOP_P
+HOLD_CAR:	MOVF PORTE,W
+			SUBLW 0x04 ;  W<--W-0x40
+			BTFSC STATUS,Z  ;¿(CONTA)=0X40?
+			GOTO HOLD_CAR ;SI			
+			MOVLW 0x01		;Limpia Display
+			CALL COMANDO
+			MOVLW 0x80		;regresa a inicio linea 1
+			CALL COMANDO
+			CLRF W
+			GOTO LOOP_P	
 
 DEFAULT: 	GOTO LOOP_P		;Caso por defecto, no hace nada, retorna al loop para evaluar los bits de control
-
-
 
 INICIA_LCD:	MOVLW 0x30
 			CALL COMANDO
