@@ -1,0 +1,254 @@
+MPLINK 4.49, Linker
+Linker Map File - Created Sun May 07 21:03:52 2023
+
+                                 Section Info
+                  Section       Type    Address   Location Size(Bytes)
+                ---------  ---------  ---------  ---------  ---------
+                   .org_0       code   0x000000    program   0x000000
+                   .org_1       code   0x000000    program   0x000002
+                   .org_2       code   0x000005    program   0x00051e
+
+
+
+                              Program Memory Usage 
+                               Start         End      
+                           ---------   ---------      
+                            0x000000    0x000000      
+                            0x000005    0x000293      
+            656 out of 8454 program addresses used, program memory utilization is 7%
+
+
+
+                              Symbols - Sorted by Name
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                 BATERIA0   0x00023b    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                 BATERIA1   0x00023e    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                 BATERIA2   0x000241    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                 BATERIA3   0x000244    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                 BATERIA4   0x000247    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                 BATERIA5   0x00024a    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                  BINARIO   0x0000b7    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                    CARGA   0x0001d8    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                    CASO0   0x000094    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                   CASO0B   0x00010a    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                  CASO0BC   0x000196    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                  CASO0BD   0x00013e    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                    CASO1   0x000096    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                   CASO1A   0x00010e    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                  CASO1AC   0x000198    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                  CASO1AD   0x000142    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                   CASO1B   0x000113    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                  CASO1BC   0x00019d    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                  CASO1BD   0x000147    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                    CASO2   0x000098    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                   CASO2A   0x000117    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                  CASO2AC   0x00019f    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                  CASO2AD   0x00014b    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                   CASO2B   0x00011c    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                  CASO2BC   0x0001a4    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                  CASO2BD   0x000150    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                    CASO3   0x00009a    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                   CASO3A   0x000120    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                  CASO3AC   0x0001a6    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                  CASO3AD   0x000154    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                   CASO3B   0x000125    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                  CASO3BC   0x0001ab    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                  CASO3BD   0x000159    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                    CASO4   0x00009c    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                   CASO4A   0x000129    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                  CASO4AC   0x0001ad    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                  CASO4AD   0x00015d    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                   CASO4B   0x00012e    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                  CASO4BD   0x000162    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                    CASO5   0x00009e    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                   CASO5A   0x000132    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                  CASO5AD   0x000166    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                  CASO5BD   0x00016b    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                    CASO6   0x0000a0    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                  CASO6AD   0x00016f    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                  CASO6BD   0x000174    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                    CASO7   0x0000a2    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                  CASO7AD   0x000178    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                  CASO7BD   0x00017d    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                    CASO8   0x0000a4    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                  CASO8AD   0x000181    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                  CASO8BD   0x000186    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                    CASO9   0x0000a6    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                  CASO9AD   0x00018a    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                    CASOA   0x0000a8    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                    CASOB   0x0000aa    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                    CASOC   0x0000ac    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                    CASOD   0x0000ae    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                    CASOE   0x0000b0    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                    CASOF   0x0000b2    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                  CENVOLT   0x00018f    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                  COMANDO   0x000269    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                 CONTINUA   0x000023    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                  CONVEND   0x0000b4    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+               CONVERHEXA   0x000082    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+      CentesimaEncontrada   0x000061    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                    DATOS   0x000270    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                  DECIMAL   0x000037    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                  DECVOLT   0x000137    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                  DEFAULT   0x000257    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                      DOS   0x000286    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+         DecimaEncontrada   0x000063    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                   ESPERA   0x000021    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                  ES_CERO   0x0000e9    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                   ES_UNO   0x0000e6    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+              HEXADECIMAL   0x000065    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                 HOLD_BIN   0x0000dc    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                 HOLD_CAR   0x00024d    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+             HOLD_DECIMAL   0x000057    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                 HOLD_HEX   0x000078    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                 HOLD_VOL   0x0000fb    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+               INICIA_LCD   0x000258    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                   INICIO   0x000005    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                     LOOP   0x00027b    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                    LOOP1   0x00027d    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                    LOOPR   0x000291    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+          LOOP_Centesimas   0x000040    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+             LOOP_Decimas   0x000046    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                   LOOP_P   0x00001f    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+           MostrarDigitos   0x00004e    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                   PRUEBA   0x000030    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                 RET100MS   0x000282    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                   RET200   0x000279    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                  RETARDO   0x00028f    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                 RETOMACV   0x0001af    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                 RETOMADV   0x00018e    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                  RETOMAV   0x000136    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                     TRES   0x000284    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                  UNIVOLT   0x000105    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                      UNO   0x000288    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                       V0   0x0001b0    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                       V1   0x0001b4    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                       V2   0x0001b8    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                       V3   0x0001bc    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                       V4   0x0001c0    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                       V5   0x0001c4    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                       V6   0x0001c8    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                       V7   0x0001cc    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                       V8   0x0001d0    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                       V9   0x0001d4    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                  VOLTAJE   0x0000ec    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+
+
+
+                              Symbols - Sorted by Address
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                   INICIO   0x000005    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                   LOOP_P   0x00001f    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                   ESPERA   0x000021    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                 CONTINUA   0x000023    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                   PRUEBA   0x000030    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                  DECIMAL   0x000037    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+          LOOP_Centesimas   0x000040    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+             LOOP_Decimas   0x000046    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+           MostrarDigitos   0x00004e    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+             HOLD_DECIMAL   0x000057    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+      CentesimaEncontrada   0x000061    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+         DecimaEncontrada   0x000063    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+              HEXADECIMAL   0x000065    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                 HOLD_HEX   0x000078    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+               CONVERHEXA   0x000082    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                    CASO0   0x000094    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                    CASO1   0x000096    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                    CASO2   0x000098    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                    CASO3   0x00009a    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                    CASO4   0x00009c    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                    CASO5   0x00009e    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                    CASO6   0x0000a0    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                    CASO7   0x0000a2    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                    CASO8   0x0000a4    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                    CASO9   0x0000a6    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                    CASOA   0x0000a8    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                    CASOB   0x0000aa    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                    CASOC   0x0000ac    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                    CASOD   0x0000ae    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                    CASOE   0x0000b0    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                    CASOF   0x0000b2    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                  CONVEND   0x0000b4    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                  BINARIO   0x0000b7    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                 HOLD_BIN   0x0000dc    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                   ES_UNO   0x0000e6    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                  ES_CERO   0x0000e9    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                  VOLTAJE   0x0000ec    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                 HOLD_VOL   0x0000fb    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                  UNIVOLT   0x000105    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                   CASO0B   0x00010a    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                   CASO1A   0x00010e    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                   CASO1B   0x000113    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                   CASO2A   0x000117    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                   CASO2B   0x00011c    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                   CASO3A   0x000120    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                   CASO3B   0x000125    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                   CASO4A   0x000129    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                   CASO4B   0x00012e    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                   CASO5A   0x000132    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                  RETOMAV   0x000136    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                  DECVOLT   0x000137    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                  CASO0BD   0x00013e    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                  CASO1AD   0x000142    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                  CASO1BD   0x000147    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                  CASO2AD   0x00014b    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                  CASO2BD   0x000150    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                  CASO3AD   0x000154    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                  CASO3BD   0x000159    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                  CASO4AD   0x00015d    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                  CASO4BD   0x000162    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                  CASO5AD   0x000166    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                  CASO5BD   0x00016b    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                  CASO6AD   0x00016f    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                  CASO6BD   0x000174    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                  CASO7AD   0x000178    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                  CASO7BD   0x00017d    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                  CASO8AD   0x000181    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                  CASO8BD   0x000186    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                  CASO9AD   0x00018a    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                 RETOMADV   0x00018e    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                  CENVOLT   0x00018f    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                  CASO0BC   0x000196    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                  CASO1AC   0x000198    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                  CASO1BC   0x00019d    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                  CASO2AC   0x00019f    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                  CASO2BC   0x0001a4    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                  CASO3AC   0x0001a6    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                  CASO3BC   0x0001ab    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                  CASO4AC   0x0001ad    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                 RETOMACV   0x0001af    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                       V0   0x0001b0    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                       V1   0x0001b4    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                       V2   0x0001b8    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                       V3   0x0001bc    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                       V4   0x0001c0    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                       V5   0x0001c4    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                       V6   0x0001c8    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                       V7   0x0001cc    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                       V8   0x0001d0    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                       V9   0x0001d4    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                    CARGA   0x0001d8    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                 BATERIA0   0x00023b    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                 BATERIA1   0x00023e    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                 BATERIA2   0x000241    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                 BATERIA3   0x000244    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                 BATERIA4   0x000247    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                 BATERIA5   0x00024a    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                 HOLD_CAR   0x00024d    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                  DEFAULT   0x000257    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+               INICIA_LCD   0x000258    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                  COMANDO   0x000269    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                    DATOS   0x000270    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                   RET200   0x000279    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                     LOOP   0x00027b    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                    LOOP1   0x00027d    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                 RET100MS   0x000282    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                     TRES   0x000284    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                      DOS   0x000286    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                      UNO   0x000288    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                  RETARDO   0x00028f    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+                    LOOPR   0x000291    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto3\Código\proyecto3.asm
+
+

@@ -1,0 +1,74 @@
+MPLINK 4.49, Linker
+Linker Map File - Created Tue Apr 25 22:39:06 2023
+
+                                 Section Info
+                  Section       Type    Address   Location Size(Bytes)
+                ---------  ---------  ---------  ---------  ---------
+                   .org_0       code   0x000000    program   0x000000
+                   .org_1       code   0x000000    program   0x000002
+                   .org_2       code   0x000005    program   0x000232
+
+
+
+                              Program Memory Usage 
+                               Start         End      
+                           ---------   ---------      
+                            0x000000    0x000000      
+                            0x000005    0x00011d      
+            282 out of 8454 program addresses used, program memory utilization is 3%
+
+
+
+                              Symbols - Sorted by Name
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                  BINARIO   0x000090    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto2\Mi versión\Nuestro\proyecto2.asm
+                 CARACTER   0x0000bf    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto2\Mi versión\Nuestro\proyecto2.asm
+                  COMANDO   0x0000f8    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto2\Mi versión\Nuestro\proyecto2.asm
+                    DATOS   0x0000ff    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto2\Mi versión\Nuestro\proyecto2.asm
+                  DECIMAL   0x00008e    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto2\Mi versión\Nuestro\proyecto2.asm
+                  DEFAULT   0x0000e6    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto2\Mi versión\Nuestro\proyecto2.asm
+                      DOS   0x000115    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto2\Mi versión\Nuestro\proyecto2.asm
+                  ES_CERO   0x0000bc    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto2\Mi versión\Nuestro\proyecto2.asm
+                   ES_UNO   0x0000b9    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto2\Mi versión\Nuestro\proyecto2.asm
+              HEXADECIMAL   0x00008f    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto2\Mi versión\Nuestro\proyecto2.asm
+                 HOLD_BIN   0x0000b0    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto2\Mi versión\Nuestro\proyecto2.asm
+               INICIA_LCD   0x0000e7    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto2\Mi versión\Nuestro\proyecto2.asm
+                   INICIO   0x000005    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto2\Mi versión\Nuestro\proyecto2.asm
+                     LOOP   0x00010a    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto2\Mi versión\Nuestro\proyecto2.asm
+                    LOOP1   0x00010c    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto2\Mi versión\Nuestro\proyecto2.asm
+                   LOOP_P   0x00001c    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto2\Mi versión\Nuestro\proyecto2.asm
+                  NOMBRES   0x000027    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto2\Mi versión\Nuestro\proyecto2.asm
+                 RET100MS   0x000111    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto2\Mi versión\Nuestro\proyecto2.asm
+                   RET200   0x000108    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto2\Mi versión\Nuestro\proyecto2.asm
+                     TRES   0x000113    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto2\Mi versión\Nuestro\proyecto2.asm
+                      UNO   0x000117    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto2\Mi versión\Nuestro\proyecto2.asm
+
+
+
+                              Symbols - Sorted by Address
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                   INICIO   0x000005    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto2\Mi versión\Nuestro\proyecto2.asm
+                   LOOP_P   0x00001c    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto2\Mi versión\Nuestro\proyecto2.asm
+                  NOMBRES   0x000027    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto2\Mi versión\Nuestro\proyecto2.asm
+                  DECIMAL   0x00008e    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto2\Mi versión\Nuestro\proyecto2.asm
+              HEXADECIMAL   0x00008f    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto2\Mi versión\Nuestro\proyecto2.asm
+                  BINARIO   0x000090    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto2\Mi versión\Nuestro\proyecto2.asm
+                 HOLD_BIN   0x0000b0    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto2\Mi versión\Nuestro\proyecto2.asm
+                   ES_UNO   0x0000b9    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto2\Mi versión\Nuestro\proyecto2.asm
+                  ES_CERO   0x0000bc    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto2\Mi versión\Nuestro\proyecto2.asm
+                 CARACTER   0x0000bf    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto2\Mi versión\Nuestro\proyecto2.asm
+                  DEFAULT   0x0000e6    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto2\Mi versión\Nuestro\proyecto2.asm
+               INICIA_LCD   0x0000e7    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto2\Mi versión\Nuestro\proyecto2.asm
+                  COMANDO   0x0000f8    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto2\Mi versión\Nuestro\proyecto2.asm
+                    DATOS   0x0000ff    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto2\Mi versión\Nuestro\proyecto2.asm
+                   RET200   0x000108    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto2\Mi versión\Nuestro\proyecto2.asm
+                     LOOP   0x00010a    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto2\Mi versión\Nuestro\proyecto2.asm
+                    LOOP1   0x00010c    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto2\Mi versión\Nuestro\proyecto2.asm
+                 RET100MS   0x000111    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto2\Mi versión\Nuestro\proyecto2.asm
+                     TRES   0x000113    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto2\Mi versión\Nuestro\proyecto2.asm
+                      DOS   0x000115    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto2\Mi versión\Nuestro\proyecto2.asm
+                      UNO   0x000117    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto2\Mi versión\Nuestro\proyecto2.asm
+
+

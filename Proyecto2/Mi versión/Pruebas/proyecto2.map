@@ -1,0 +1,126 @@
+MPLINK 4.49, Linker
+Linker Map File - Created Sun Apr 30 22:23:29 2023
+
+                                 Section Info
+                  Section       Type    Address   Location Size(Bytes)
+                ---------  ---------  ---------  ---------  ---------
+                   .org_0       code   0x000000    program   0x000000
+                   .org_1       code   0x000000    program   0x000002
+                   .org_2       code   0x000005    program   0x00034c
+
+
+
+                              Program Memory Usage 
+                               Start         End      
+                           ---------   ---------      
+                            0x000000    0x000000      
+                            0x000005    0x0001aa      
+            423 out of 8454 program addresses used, program memory utilization is 5%
+
+
+
+                              Symbols - Sorted by Name
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                  BINARIO   0x0000d8    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto2\Mi versión\Pruebas\proyecto2.asm
+                 CARACTER   0x00010c    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto2\Mi versión\Pruebas\proyecto2.asm
+                    CASO0   0x0000b5    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto2\Mi versión\Pruebas\proyecto2.asm
+                    CASO1   0x0000b7    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto2\Mi versión\Pruebas\proyecto2.asm
+                    CASO2   0x0000b9    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto2\Mi versión\Pruebas\proyecto2.asm
+                    CASO3   0x0000bb    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto2\Mi versión\Pruebas\proyecto2.asm
+                    CASO4   0x0000bd    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto2\Mi versión\Pruebas\proyecto2.asm
+                    CASO5   0x0000bf    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto2\Mi versión\Pruebas\proyecto2.asm
+                    CASO6   0x0000c1    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto2\Mi versión\Pruebas\proyecto2.asm
+                    CASO7   0x0000c3    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto2\Mi versión\Pruebas\proyecto2.asm
+                    CASO8   0x0000c5    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto2\Mi versión\Pruebas\proyecto2.asm
+                    CASO9   0x0000c7    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto2\Mi versión\Pruebas\proyecto2.asm
+                    CASOA   0x0000c9    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto2\Mi versión\Pruebas\proyecto2.asm
+                    CASOB   0x0000cb    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto2\Mi versión\Pruebas\proyecto2.asm
+                    CASOC   0x0000cd    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto2\Mi versión\Pruebas\proyecto2.asm
+                    CASOD   0x0000cf    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto2\Mi versión\Pruebas\proyecto2.asm
+                    CASOE   0x0000d1    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto2\Mi versión\Pruebas\proyecto2.asm
+                    CASOF   0x0000d3    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto2\Mi versión\Pruebas\proyecto2.asm
+                  COMANDO   0x000185    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto2\Mi versión\Pruebas\proyecto2.asm
+                  CONVEND   0x0000d5    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto2\Mi versión\Pruebas\proyecto2.asm
+               CONVERHEXA   0x0000a3    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto2\Mi versión\Pruebas\proyecto2.asm
+      CentesimaEncontrada   0x000082    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto2\Mi versión\Pruebas\proyecto2.asm
+                    DATOS   0x00018c    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto2\Mi versión\Pruebas\proyecto2.asm
+                  DECIMAL   0x000058    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto2\Mi versión\Pruebas\proyecto2.asm
+                  DEFAULT   0x000173    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto2\Mi versión\Pruebas\proyecto2.asm
+                      DOS   0x0001a2    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto2\Mi versión\Pruebas\proyecto2.asm
+         DecimaEncontrada   0x000084    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto2\Mi versión\Pruebas\proyecto2.asm
+                  ES_CERO   0x000109    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto2\Mi versión\Pruebas\proyecto2.asm
+                   ES_UNO   0x000106    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto2\Mi versión\Pruebas\proyecto2.asm
+              HEXADECIMAL   0x000086    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto2\Mi versión\Pruebas\proyecto2.asm
+                 HOLD_BIN   0x0000fc    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto2\Mi versión\Pruebas\proyecto2.asm
+                 HOLD_CAR   0x00004e    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto2\Mi versión\Pruebas\proyecto2.asm
+             HOLD_DECIMAL   0x000078    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto2\Mi versión\Pruebas\proyecto2.asm
+                 HOLD_HEX   0x000099    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto2\Mi versión\Pruebas\proyecto2.asm
+               INICIA_LCD   0x000174    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto2\Mi versión\Pruebas\proyecto2.asm
+                   INICIO   0x000005    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto2\Mi versión\Pruebas\proyecto2.asm
+                     LOOP   0x000197    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto2\Mi versión\Pruebas\proyecto2.asm
+                    LOOP1   0x000199    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto2\Mi versión\Pruebas\proyecto2.asm
+          LOOP_Centesimas   0x000061    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto2\Mi versión\Pruebas\proyecto2.asm
+             LOOP_Decimas   0x000067    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto2\Mi versión\Pruebas\proyecto2.asm
+                   LOOP_P   0x00001c    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto2\Mi versión\Pruebas\proyecto2.asm
+           MostrarDigitos   0x00006f    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto2\Mi versión\Pruebas\proyecto2.asm
+                  NOMBRES   0x000027    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto2\Mi versión\Pruebas\proyecto2.asm
+                 RET100MS   0x00019e    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto2\Mi versión\Pruebas\proyecto2.asm
+                   RET200   0x000195    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto2\Mi versión\Pruebas\proyecto2.asm
+                     TRES   0x0001a0    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto2\Mi versión\Pruebas\proyecto2.asm
+                      UNO   0x0001a4    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto2\Mi versión\Pruebas\proyecto2.asm
+
+
+
+                              Symbols - Sorted by Address
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                   INICIO   0x000005    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto2\Mi versión\Pruebas\proyecto2.asm
+                   LOOP_P   0x00001c    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto2\Mi versión\Pruebas\proyecto2.asm
+                  NOMBRES   0x000027    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto2\Mi versión\Pruebas\proyecto2.asm
+                 HOLD_CAR   0x00004e    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto2\Mi versión\Pruebas\proyecto2.asm
+                  DECIMAL   0x000058    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto2\Mi versión\Pruebas\proyecto2.asm
+          LOOP_Centesimas   0x000061    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto2\Mi versión\Pruebas\proyecto2.asm
+             LOOP_Decimas   0x000067    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto2\Mi versión\Pruebas\proyecto2.asm
+           MostrarDigitos   0x00006f    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto2\Mi versión\Pruebas\proyecto2.asm
+             HOLD_DECIMAL   0x000078    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto2\Mi versión\Pruebas\proyecto2.asm
+      CentesimaEncontrada   0x000082    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto2\Mi versión\Pruebas\proyecto2.asm
+         DecimaEncontrada   0x000084    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto2\Mi versión\Pruebas\proyecto2.asm
+              HEXADECIMAL   0x000086    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto2\Mi versión\Pruebas\proyecto2.asm
+                 HOLD_HEX   0x000099    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto2\Mi versión\Pruebas\proyecto2.asm
+               CONVERHEXA   0x0000a3    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto2\Mi versión\Pruebas\proyecto2.asm
+                    CASO0   0x0000b5    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto2\Mi versión\Pruebas\proyecto2.asm
+                    CASO1   0x0000b7    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto2\Mi versión\Pruebas\proyecto2.asm
+                    CASO2   0x0000b9    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto2\Mi versión\Pruebas\proyecto2.asm
+                    CASO3   0x0000bb    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto2\Mi versión\Pruebas\proyecto2.asm
+                    CASO4   0x0000bd    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto2\Mi versión\Pruebas\proyecto2.asm
+                    CASO5   0x0000bf    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto2\Mi versión\Pruebas\proyecto2.asm
+                    CASO6   0x0000c1    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto2\Mi versión\Pruebas\proyecto2.asm
+                    CASO7   0x0000c3    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto2\Mi versión\Pruebas\proyecto2.asm
+                    CASO8   0x0000c5    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto2\Mi versión\Pruebas\proyecto2.asm
+                    CASO9   0x0000c7    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto2\Mi versión\Pruebas\proyecto2.asm
+                    CASOA   0x0000c9    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto2\Mi versión\Pruebas\proyecto2.asm
+                    CASOB   0x0000cb    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto2\Mi versión\Pruebas\proyecto2.asm
+                    CASOC   0x0000cd    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto2\Mi versión\Pruebas\proyecto2.asm
+                    CASOD   0x0000cf    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto2\Mi versión\Pruebas\proyecto2.asm
+                    CASOE   0x0000d1    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto2\Mi versión\Pruebas\proyecto2.asm
+                    CASOF   0x0000d3    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto2\Mi versión\Pruebas\proyecto2.asm
+                  CONVEND   0x0000d5    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto2\Mi versión\Pruebas\proyecto2.asm
+                  BINARIO   0x0000d8    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto2\Mi versión\Pruebas\proyecto2.asm
+                 HOLD_BIN   0x0000fc    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto2\Mi versión\Pruebas\proyecto2.asm
+                   ES_UNO   0x000106    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto2\Mi versión\Pruebas\proyecto2.asm
+                  ES_CERO   0x000109    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto2\Mi versión\Pruebas\proyecto2.asm
+                 CARACTER   0x00010c    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto2\Mi versión\Pruebas\proyecto2.asm
+                  DEFAULT   0x000173    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto2\Mi versión\Pruebas\proyecto2.asm
+               INICIA_LCD   0x000174    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto2\Mi versión\Pruebas\proyecto2.asm
+                  COMANDO   0x000185    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto2\Mi versión\Pruebas\proyecto2.asm
+                    DATOS   0x00018c    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto2\Mi versión\Pruebas\proyecto2.asm
+                   RET200   0x000195    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto2\Mi versión\Pruebas\proyecto2.asm
+                     LOOP   0x000197    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto2\Mi versión\Pruebas\proyecto2.asm
+                    LOOP1   0x000199    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto2\Mi versión\Pruebas\proyecto2.asm
+                 RET100MS   0x00019e    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto2\Mi versión\Pruebas\proyecto2.asm
+                     TRES   0x0001a0    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto2\Mi versión\Pruebas\proyecto2.asm
+                      DOS   0x0001a2    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto2\Mi versión\Pruebas\proyecto2.asm
+                      UNO   0x0001a4    program     static D:\carlo\Documentos\FI\8vo Semestre\Microcomputadoras\Proyecto2\Mi versión\Pruebas\proyecto2.asm
+
+

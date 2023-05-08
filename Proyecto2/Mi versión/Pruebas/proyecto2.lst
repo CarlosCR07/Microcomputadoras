@@ -1,0 +1,1020 @@
+MPASM  5.51                     PROYECTO2.ASM   4-30-2023  22:23:28         PAGE  1
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00001                 PROCESSOR 16F877
+                      00002                 INCLUDE <P16F877.INC>
+                      00001         LIST
+                      00002 
+                      00003 ;==========================================================================
+                      00004 ;  MPASM PIC16F877 processor include
+                      00005 ; 
+                      00006 ;  (c) Copyright 1999-2013 Microchip Technology, All rights reserved
+                      00007 ;==========================================================================
+                      00008 
+Message[301]: MESSAGE: (Processor-header file mismatch.  Verify selected processor.)
+                      00540         LIST
+                      00003                 
+  00000020            00004 valor   equ h'20'                       ;Registros auxiliares para rutina de retardo
+  00000021            00005 valor1  equ h'21'
+  00000022            00006 valor2  equ h'22'
+  00000023            00007 contadorCentesima equ h'23'     ;Registros auxiliares para conversi?n Hexa - Decimal
+  00000024            00008 contadorDecima equ h'24'
+  00000025            00009 contadorUnidad equ h'25'
+  00000028            00010 aux equ h'28'
+  00000026            00011 regaux equ h'26'                        ;Registros auxiliares para visualizar en Hexadecimal
+  00000027            00012 regaux2 equ h'27'
+                      00013 
+0000                  00014                         ORG 0 ;Vector de reset
+0000   2805           00015                         GOTO INICIO
+0005                  00016                         ORG 5
+                      00017 
+0005   0185           00018 INICIO:         CLRF PORTA ; Limpia PORTA
+0006   0186           00019                         CLRF PORTB ; Limpia PORTB
+0007   0187           00020                         CLRF PORTC      ; Limpia PORTC
+0008   0188           00021                         CLRF PORTD      ; Limpia PORTD
+0009   0189           00022                         CLRF PORTE      ; Limpia PORTE
+000A   1683           00023                         BSF STATUS,5 ; Cambia a banco 1
+000B   1303           00024                         BCF STATUS,6
+000C   3000           00025                         MOVLW 0x00
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+000D   0086           00026                         MOVWF TRISB     ;TRISB<- 0x00 configuramos puerto B como salida
+000E   3000           00027                         MOVLW H'0'              ; CONFIGURA PUERTO C COMO SALIDA
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+000F   0087           00028                         MOVWF TRISC             ; (TRISC) <-- 0h
+0010   30FF           00029                         MOVLW 0xFF              ; CONFIGURA PUERTO D COMO ENTRADA
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0011   0088           00030                         MOVWF TRISD             ; (TRISD) <-- FFh
+0012   30FF           00031                         MOVLW 0xFF              ; CONFIGURA PUERTO E COMO ENTRADA
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0013   0089           00032                         MOVWF TRISE             ; (TRISE) <-- FFh
+0014   3007           00033                         MOVLW 0x07
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0015   009F           00034                         MOVWF ADCON1 ;ADCON1 <- 0x07, configura puerto A y E como entradas digitales
+0016   3000           00035                         MOVLW 0x00      
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0017   0085           00036                         MOVWF TRISA      ;TRISA <- 0x00, configura puerto A como salida 
+0018   1283           00037                         BCF STATUS,5 ;Regresamos al banco 0
+MPASM  5.51                     PROYECTO2.ASM   4-30-2023  22:23:28         PAGE  2
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0019   2174           00038                         CALL INICIA_LCD
+001A   3080           00039                         MOVLW 0x80
+001B   2185           00040                         CALL COMANDO
+                      00041                         
+001C   0809           00042 LOOP_P:         MOVF PORTE,W    ;W<-- (PORTE)
+001D   3907           00043                         ANDLW 7                 ;W <-- W&00000111
+001E   0782           00044                         ADDWF PCL,F             ;(PCL)<-- (PCL)+W
+001F   2827           00045                         GOTO NOMBRES    ;PC+0   -> Switches: 000
+0020   2858           00046                         GOTO DECIMAL    ;PC+1   -> Switches: 001        Conversi?n entrada dipswitch de 
+                            8 bits a decimal
+0021   2886           00047                         GOTO HEXADECIMAL;PC+2   -> Switches: 010        Conversi?n entrada dipswitch de 
+                            8 bits a hexadecimal
+0022   28D8           00048                         GOTO BINARIO    ;PC+3   -> Switches: 011        Conversi?n entrada dipswitch de 
+                            8 bits a binario
+0023   290C           00049                         GOTO CARACTER   ;PC+4   -> Switches: 100        
+0024   2973           00050                         GOTO DEFAULT    ;PC+5   -> Switches: 101
+0025   2973           00051                         GOTO DEFAULT    ;PC+6 -> Switches: 110
+0026   2973           00052                         GOTO DEFAULT    ;PC+7 -> -> Switches: 111
+                      00053                         
+0027   3040           00054 NOMBRES:        MOVLW 0X40 ;ALMACENAR CARACTERES EN CGRAM
+0028   2185           00055                         CALL COMANDO
+0029   219E           00056                         CALL RET100MS
+                      00057 
+                      00058                         ;CUADRO 0 - ALMACENANDO - FANTASMA
+002A   3004           00059                         MOVLW b'00100'
+002B   218C           00060                         CALL DATOS
+002C   300E           00061                         MOVLW b'01110'
+002D   218C           00062                         CALL DATOS
+002E   301F           00063                         MOVLW b'11111'
+002F   218C           00064                         CALL DATOS
+0030   3015           00065                         MOVLW b'10101'
+0031   218C           00066                         CALL DATOS
+0032   301F           00067                         MOVLW b'11111'
+0033   218C           00068                         CALL DATOS
+0034   301F           00069                         MOVLW b'11111'
+0035   218C           00070                         CALL DATOS
+0036   3015           00071                         MOVLW b'10101'
+0037   218C           00072                         CALL DATOS
+                      00073 
+                      00074                         ;CUADRO 1 - ALMACENANDO - SONRISA
+0038   3000           00075                         MOVLW b'00000'
+0039   218C           00076                         CALL DATOS
+003A   301B           00077                         MOVLW b'11011'
+003B   218C           00078                         CALL DATOS
+003C   301B           00079                         MOVLW b'11011'
+003D   218C           00080                         CALL DATOS
+003E   3000           00081                         MOVLW b'00000'
+003F   218C           00082                         CALL DATOS
+0040   3011           00083                         MOVLW b'10001'
+0041   218C           00084                         CALL DATOS
+0042   301F           00085                         MOVLW b'11111'
+0043   218C           00086                         CALL DATOS
+0044   300E           00087                         MOVLW b'01110'
+MPASM  5.51                     PROYECTO2.ASM   4-30-2023  22:23:28         PAGE  3
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0045   218C           00088                         CALL DATOS
+                      00089 
+                      00090                         
+                      00091                         ;COLOCA EN PRIMERA LINEA DEL DISPLAY
+0046   3080           00092                         MOVLW 0X80
+0047   2185           00093                         CALL COMANDO
+0048   2195           00094                         CALL RET200
+0049   2195           00095                         CALL RET200
+                      00096 
+                      00097                         ;IMPRESION DE CARACTER
+004A   3000           00098                         MOVLW 0X00 ;CUADRO 0 - FANTASMA
+004B   218C           00099                         CALL DATOS 
+004C   3001           00100                         MOVLW 0X01
+004D   218C           00101                         CALL DATOS ;CUADRO 1 - SONRISA
+                      00102 
+004E   0809           00103 HOLD_CAR:       MOVF PORTE,W
+004F   3C04           00104                         SUBLW 0x04 ;  W<--W-0x40
+0050   1903           00105                         BTFSC STATUS,Z  ;?(CONTA)=0X40?
+0051   284E           00106                         GOTO HOLD_CAR ;SI                       
+0052   3001           00107                         MOVLW 0x01              ;Limpia Display
+0053   2185           00108                         CALL COMANDO
+0054   3080           00109                         MOVLW 0x80              ;regresa a inicio linea 1
+0055   2185           00110                         CALL COMANDO
+0056   0180           00111                         CLRF W
+0057   281C           00112                         GOTO LOOP_P     
+                      00113 
+0058   01A3           00114 DECIMAL:        CLRF contadorCentesima          ;Inicializa en 0
+0059   01A4           00115                         CLRF contadorDecima                     ;Inicializa en 0
+005A   01A5           00116                         CLRF contadorUnidad                     ;Inicializa en 0
+005B   3044           00117                         MOVLW a'D'
+005C   218C           00118                         CALL DATOS
+005D   303A           00119                         MOVLW 0x3A              ;Dos puntos
+005E   218C           00120                         CALL DATOS
+005F   0808           00121                         MOVF PORTD,W    ;Leer el valor de los switches y lo almacena en aux
+0060   00A8           00122                         MOVWF aux       
+                      00123         
+0061   3064           00124 LOOP_Centesimas:MOVLW 0x64                              ;Restar 100
+Message[305]: Using default destination of 1 (file).
+0062   02A8           00125                                 SUBWF aux
+0063   1803           00126                                 BTFSC STATUS,C                  ;Verifica el estado de carry
+0064   2882           00127                                 GOTO CentesimaEncontrada        ;SI hay carry, el resultado es un n?mero
+                             positivo                               
+0065   3064           00128                                 MOVLW 0x64
+Message[305]: Using default destination of 1 (file).
+0066   07A8           00129                                 ADDWF aux                                       ;NO hay carry, entonces 
+                            recuperar residuo
+0067   300A           00130 LOOP_Decimas:   MOVLW 0x0A
+Message[305]: Using default destination of 1 (file).
+0068   02A8           00131                                 SUBWF aux                               ;Restar 10
+0069   1803           00132                                 BTFSC STATUS,C                  ;Verifica el estado de carry
+006A   2884           00133                                 GOTO DecimaEncontrada           ;SI hay carry, el resultado es un n?mero
+                             positivo
+006B   300A           00134                                 MOVLW 0x0A
+MPASM  5.51                     PROYECTO2.ASM   4-30-2023  22:23:28         PAGE  4
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+Message[305]: Using default destination of 1 (file).
+006C   07A8           00135                                 ADDWF aux                                       ;NO hay carry, entonces 
+                            recuperar residuo = Unidades
+006D   0828           00136                                 MOVF aux,w
+006E   00A5           00137                                 MOVWF contadorUnidad    ;Guardar en contador
+                      00138 
+006F   0823           00139 MostrarDigitos: MOVF contadorCentesima,W        
+0070   3E30           00140                                 ADDLW 0x30                                      ;Obtener valor ASCII
+0071   218C           00141                                 CALL DATOS                                      ;Display Centesimas
+0072   0824           00142                                 MOVF contadorDecima,W           
+0073   3E30           00143                                 ADDLW 0x30                                      ;Obtener valor ASCII
+0074   218C           00144                                 CALL DATOS                                      ;Display Decimas
+0075   0825           00145                                 MOVF contadorUnidad,W           
+0076   3E30           00146                                 ADDLW 0x30                                      ;Obtener valor ASCII
+0077   218C           00147                                 CALL DATOS                                      ;Display Unidades
+                      00148 
+0078   0809           00149 HOLD_DECIMAL:   MOVF PORTE,W
+0079   3C01           00150                                 SUBLW 0x01              ;W<--W-0x10
+007A   1903           00151                                 BTFSC STATUS,Z          ;?(CONTA)=0X10?
+007B   2878           00152                                 GOTO HOLD_DECIMAL               ;SI                     
+007C   3001           00153                                 MOVLW 0x01                              ;NO, Limpia Display
+007D   2185           00154                                 CALL COMANDO
+007E   3080           00155                                 MOVLW 0x80                      ;regresa a inicio linea 1
+007F   2185           00156                                 CALL COMANDO
+0080   0180           00157                                 CLRF W
+0081   281C           00158                                 GOTO LOOP_P     
+                      00159 
+Message[305]: Using default destination of 1 (file).
+0082   0AA3           00160 CentesimaEncontrada:INCF contadorCentesima
+0083   2861           00161                                         GOTO LOOP_Centesimas
+                      00162 
+Message[305]: Using default destination of 1 (file).
+0084   0AA4           00163 DecimaEncontrada:       INCF contadorDecima     
+0085   2867           00164                                         GOTO LOOP_Decimas
+                      00165 
+0086   3048           00166 HEXADECIMAL:MOVLW a'H'
+0087   218C           00167                         CALL DATOS
+0088   303A           00168                         MOVLW 0x3A              ;Dos puntos
+0089   218C           00169                         CALL DATOS
+008A   0180           00170                         CLRF W
+008B   0808           00171                         MOVF PORTD,W
+008C   00A7           00172                         MOVWF regaux2
+008D   0827           00173                         MOVF regaux2,W  ;restauramos el valor guardado por si acaso sufriese algun cambi
+                            o
+008E   39F0           00174                         ANDLW 0xF0              ;extraemos la parte alta
+008F   00A6           00175                         MOVWF regaux    ;regaux <- W
+0090   0CA6           00176                         RRF regaux,f
+0091   0CA6           00177                         RRF regaux,f
+0092   0CA6           00178                         RRF regaux,f
+0093   0CA6           00179                         RRF regaux,f    ;convertida en parte baja
+0094   20A3           00180                         CALL CONVERHEXA
+0095   0827           00181                         MOVF regaux2,W  ;restauramos el valor guardado por si acaso sufriese algun cambi
+                            o
+MPASM  5.51                     PROYECTO2.ASM   4-30-2023  22:23:28         PAGE  5
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0096   390F           00182                         ANDLW 0x0F              ;extraemos la parte BAJA
+0097   00A6           00183                         MOVWF regaux    ;regaux <- W
+0098   20A3           00184                         CALL CONVERHEXA
+0099   0809           00185 HOLD_HEX:       MOVF PORTE,W            ;FUNCION PARA RETENER EL RESULTADO EN LCD
+009A   3C02           00186                         SUBLW 0x02 ;  W<--W-0x30
+009B   1903           00187                         BTFSC STATUS,Z  ;?(CONTA)=0X20?
+009C   2899           00188                         GOTO HOLD_HEX   ;SI                     
+009D   3001           00189                         MOVLW 0x01              ;NO, Limpia Display
+009E   2185           00190                         CALL COMANDO
+009F   3080           00191                         MOVLW 0x80              ;regresa a inicio linea 1
+00A0   2185           00192                         CALL COMANDO
+00A1   0180           00193                         CLRF W
+00A2   281C           00194                         GOTO LOOP_P     
+00A3   0826           00195 CONVERHEXA:     MOVF regaux,W   ; W<- (regaux)
+                      00196                         ;ANDLW 15                       ;W <-- W&00001111, el cuarto bit siempre est? ac
+                            tivo para las letras
+00A4   0782           00197                         ADDWF PCL,F             ;(PCL)<-- (PCL)+W
+00A5   28B5           00198                         GOTO CASO0              ;PC+0   Caso 0000: Numero 0
+00A6   28B7           00199                         GOTO CASO1              ;PC+1   Caso 0001: Numero 1
+00A7   28B9           00200                         GOTO CASO2              ;PC+2   Caso 0010: Numero 2
+00A8   28BB           00201                         GOTO CASO3              ;PC+3   Caso 0011: Numero 3
+00A9   28BD           00202                         GOTO CASO4              ;PC+4   Caso 0100: Numero 4
+00AA   28BF           00203                         GOTO CASO5              ;PC+5   Caso 0101: Numero 5
+00AB   28C1           00204                         GOTO CASO6              ;PC+6   Caso 0110: Numero 6
+00AC   28C3           00205                         GOTO CASO7              ;PC+7   Caso 0111: Numero 7
+00AD   28C5           00206                         GOTO CASO8              ;PC+8   Caso 1000: Numero 8
+00AE   28C7           00207                         GOTO CASO9              ;PC+9   Caso 1001: Numero 9
+00AF   28C9           00208                         GOTO CASOA              ;PC+10  Caso 1010: Letra A 
+00B0   28CB           00209                         GOTO CASOB              ;PC+11  Caso 1011: Letra B 
+00B1   28CD           00210                         GOTO CASOC              ;PC+12  Caso 1100: Letra C 
+00B2   28CF           00211                         GOTO CASOD              ;PC+13  Caso 1101: Letra D 
+00B3   28D1           00212                         GOTO CASOE              ;PC+14  Caso 1110: Letra E 
+00B4   28D3           00213                         GOTO CASOF              ;PC+15  Caso 1111: Letra F 
+00B5   3030           00214 CASO0:          MOVLW a'0'
+00B6   28D5           00215                         GOTO CONVEND
+00B7   3031           00216 CASO1:          MOVLW a'1'
+00B8   28D5           00217                         GOTO CONVEND
+00B9   3032           00218 CASO2:          MOVLW a'2'
+00BA   28D5           00219                         GOTO CONVEND
+00BB   3033           00220 CASO3:          MOVLW a'3'
+00BC   28D5           00221                         GOTO CONVEND
+00BD   3034           00222 CASO4:          MOVLW a'4'
+00BE   28D5           00223                         GOTO CONVEND
+00BF   3035           00224 CASO5:          MOVLW a'5'
+00C0   28D5           00225                         GOTO CONVEND
+00C1   3036           00226 CASO6:          MOVLW a'6'
+00C2   28D5           00227                         GOTO CONVEND
+00C3   3037           00228 CASO7:          MOVLW a'7'
+00C4   28D5           00229                         GOTO CONVEND
+00C5   3038           00230 CASO8:          MOVLW a'8'
+00C6   28D5           00231                         GOTO CONVEND
+00C7   3039           00232 CASO9:          MOVLW a'9'
+00C8   28D5           00233                         GOTO CONVEND
+MPASM  5.51                     PROYECTO2.ASM   4-30-2023  22:23:28         PAGE  6
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+00C9   3041           00234 CASOA:          MOVLW a'A'
+00CA   28D5           00235                         GOTO CONVEND
+00CB   3042           00236 CASOB:          MOVLW a'B'
+00CC   28D5           00237                         GOTO CONVEND
+00CD   3043           00238 CASOC:          MOVLW a'C'
+00CE   28D5           00239                         GOTO CONVEND
+00CF   3044           00240 CASOD:          MOVLW a'D'
+00D0   28D5           00241                         GOTO CONVEND
+00D1   3045           00242 CASOE:          MOVLW a'E'
+00D2   28D5           00243                         GOTO CONVEND
+00D3   3046           00244 CASOF:          MOVLW a'F'
+00D4   28D5           00245                         GOTO CONVEND
+                      00246 
+00D5   218C           00247 CONVEND:        CALL DATOS              ; Imprimimos el simbolo en el LCD
+00D6   0180           00248                         CLRF W
+00D7   0008           00249                         RETURN
+                      00250 
+00D8   3042           00251 BINARIO:        MOVLW a'B'
+00D9   218C           00252                         CALL DATOS
+00DA   303A           00253                         MOVLW 0x3A              ;Dos puntos
+00DB   218C           00254                         CALL DATOS
+00DC   1B88           00255                         BTFSC PORTD,7
+00DD   2106           00256                         CALL ES_UNO
+00DE   1F88           00257                         BTFSS PORTD,7
+00DF   2109           00258                         CALL ES_CERO
+00E0   1B08           00259                         BTFSC PORTD,6
+00E1   2106           00260                         CALL ES_UNO
+00E2   1F08           00261                         BTFSS PORTD,6
+00E3   2109           00262                         CALL ES_CERO
+00E4   1A88           00263                         BTFSC PORTD,5
+00E5   2106           00264                         CALL ES_UNO
+00E6   1E88           00265                         BTFSS PORTD,5
+00E7   2109           00266                         CALL ES_CERO
+00E8   1A08           00267                         BTFSC PORTD,4
+00E9   2106           00268                         CALL ES_UNO
+00EA   1E08           00269                         BTFSS PORTD,4
+00EB   2109           00270                         CALL ES_CERO
+00EC   1988           00271                         BTFSC PORTD,3
+00ED   2106           00272                         CALL ES_UNO
+00EE   1D88           00273                         BTFSS PORTD,3
+00EF   2109           00274                         CALL ES_CERO
+00F0   1908           00275                         BTFSC PORTD,2
+00F1   2106           00276                         CALL ES_UNO
+00F2   1D08           00277                         BTFSS PORTD,2
+00F3   2109           00278                         CALL ES_CERO
+00F4   1888           00279                         BTFSC PORTD,1
+00F5   2106           00280                         CALL ES_UNO
+00F6   1C88           00281                         BTFSS PORTD,1
+00F7   2109           00282                         CALL ES_CERO
+00F8   1808           00283                         BTFSC PORTD,0
+00F9   2106           00284                         CALL ES_UNO
+00FA   1C08           00285                         BTFSS PORTD,0
+00FB   2109           00286                         CALL ES_CERO
+MPASM  5.51                     PROYECTO2.ASM   4-30-2023  22:23:28         PAGE  7
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+00FC   0809           00287 HOLD_BIN:       MOVF PORTE,W
+00FD   3C03           00288                         SUBLW 0x03 ;  W<--W-0x30
+00FE   1903           00289                         BTFSC STATUS,Z  ;?(CONTA)=0X30?
+00FF   28FC           00290                         GOTO HOLD_BIN ;SI                       
+0100   3001           00291                         MOVLW 0x01              ;Limpia Display
+0101   2185           00292                         CALL COMANDO
+0102   3080           00293                         MOVLW 0x80              ;regresa a inicio linea 1
+0103   2185           00294                         CALL COMANDO
+0104   0180           00295                         CLRF W
+0105   281C           00296                         GOTO LOOP_P             
+0106   3031           00297 ES_UNO:         MOVLW a'1'
+0107   218C           00298                         CALL DATOS
+0108   0008           00299                         RETURN
+0109   3030           00300 ES_CERO         MOVLW a'0'
+010A   218C           00301                         CALL DATOS
+010B   0008           00302                         RETURN
+                      00303 
+010C   3050           00304 CARACTER:       MOVLW a'P'
+010D   218C           00305                         CALL DATOS
+010E   3041           00306                         MOVLW a'A'
+010F   218C           00307                         CALL DATOS
+0110   304D           00308                         MOVLW a'M'
+0111   218C           00309                         CALL DATOS
+0112   3045           00310                         MOVLW a'E'
+0113   218C           00311                         CALL DATOS
+0114   304C           00312                         MOVLW a'L'
+0115   218C           00313                         CALL DATOS
+0116   3041           00314                         MOVLW a'A'
+0117   218C           00315                         CALL DATOS
+0118   3020           00316                         MOVLW 0x20      ;Espacio en blanco
+0119   218C           00317                         CALL DATOS
+011A   3043           00318                         MOVLW a'C'
+011B   218C           00319                         CALL DATOS
+011C   3041           00320                         MOVLW a'A'
+011D   218C           00321                         CALL DATOS
+011E   3053           00322                         MOVLW a'S'
+011F   218C           00323                         CALL DATOS
+0120   3054           00324                         MOVLW a'T'
+0121   218C           00325                         CALL DATOS
+0122   3049           00326                         MOVLW a'I'
+0123   218C           00327                         CALL DATOS
+0124   304C           00328                         MOVLW a'L'
+0125   218C           00329                         CALL DATOS
+0126   304C           00330                         MOVLW a'L'
+0127   218C           00331                         CALL DATOS
+0128   304F           00332                         MOVLW a'O'
+0129   218C           00333                         CALL DATOS
+                      00334                         ;SEGUNDO INTEGRANTE
+012A   30C0           00335                         MOVLW 0xC0              ;Valor para hacer salto de linea, inicio linea 2
+012B   2185           00336                         CALL COMANDO
+012C   3043           00337                         MOVLW a'C'
+012D   218C           00338                         CALL DATOS
+012E   3041           00339                         MOVLW a'A'
+MPASM  5.51                     PROYECTO2.ASM   4-30-2023  22:23:28         PAGE  8
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+012F   218C           00340                         CALL DATOS
+0130   3052           00341                         MOVLW a'R'
+0131   218C           00342                         CALL DATOS
+0132   304C           00343                         MOVLW a'L'
+0133   218C           00344                         CALL DATOS
+0134   304F           00345                         MOVLW a'O'
+0135   218C           00346                         CALL DATOS
+0136   3053           00347                         MOVLW a'S'
+0137   218C           00348                         CALL DATOS
+0138   3020           00349                         MOVLW 0x20      ;Espacio en blanco
+0139   218C           00350                         CALL DATOS
+013A   3043           00351                         MOVLW a'C'
+013B   218C           00352                         CALL DATOS              
+013C   3041           00353                         MOVLW a'A'
+013D   218C           00354                         CALL DATOS
+013E   3053           00355                         MOVLW a'S'
+013F   218C           00356                         CALL DATOS
+0140   3054           00357                         MOVLW a'T'
+0141   218C           00358                         CALL DATOS
+0142   3045           00359                         MOVLW a'E'
+0143   218C           00360                         CALL DATOS
+0144   304C           00361                         MOVLW a'L'
+0145   218C           00362                         CALL DATOS
+0146   3041           00363                         MOVLW a'A'
+0147   218C           00364                         CALL DATOS
+0148   304E           00365                         MOVLW a'N'
+0149   218C           00366                         CALL DATOS
+014A   3001           00367                         MOVLW 0x01              ;Limpia Display
+014B   2185           00368                         CALL COMANDO
+                      00369                         ;TERCER INTEGRANTE
+014C   3080           00370                         MOVLW 0x80              ;regresa a inicio linea 1
+014D   2185           00371                         CALL COMANDO
+014E   3052           00372                         MOVLW a'R'
+014F   218C           00373                         CALL DATOS
+0150   304F           00374                         MOVLW a'O'
+0151   218C           00375                         CALL DATOS
+0152   3047           00376                         MOVLW a'G'
+0153   218C           00377                         CALL DATOS
+0154   3045           00378                         MOVLW a'E'
+0155   218C           00379                         CALL DATOS
+0156   304C           00380                         MOVLW a'L'
+0157   218C           00381                         CALL DATOS
+0158   3049           00382                         MOVLW a'I'
+0159   218C           00383                         CALL DATOS
+015A   304F           00384                         MOVLW a'O'
+015B   218C           00385                         CALL DATOS
+                      00386                         ;MOVLW 0x20     ;Espacio en blanco
+                      00387                         ;MOVWF PORTB
+                      00388                         ;CALL DATOS
+015C   3048           00389                         MOVLW a'H'
+015D   218C           00390                         CALL DATOS
+015E   3045           00391                         MOVLW a'E'
+015F   218C           00392                         CALL DATOS
+MPASM  5.51                     PROYECTO2.ASM   4-30-2023  22:23:28         PAGE  9
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0160   3052           00393                         MOVLW a'R'
+0161   218C           00394                         CALL DATOS
+0162   304E           00395                         MOVLW a'N'
+0163   218C           00396                         CALL DATOS
+0164   3041           00397                         MOVLW a'A'
+0165   218C           00398                         CALL DATOS
+0166   304E           00399                         MOVLW a'N'
+0167   218C           00400                         CALL DATOS
+0168   3044           00401                         MOVLW a'D'
+0169   218C           00402                         CALL DATOS
+016A   3045           00403                         MOVLW a'E'
+016B   218C           00404                         CALL DATOS
+016C   305A           00405                         MOVLW a'Z'
+016D   218C           00406                         CALL DATOS
+016E   3001           00407                         MOVLW 0x01              ;Limpia Display
+016F   2185           00408                         CALL COMANDO
+0170   3080           00409                         MOVLW 0x80              ;regresa a inicio linea 1
+0171   2185           00410                         CALL COMANDO
+0172   281C           00411                         GOTO LOOP_P
+                      00412 
+0173   281C           00413 DEFAULT:        GOTO LOOP_P             ;Caso por defecto, no hace nada, retorna al loop para evaluar lo
+                            s bits de control
+                      00414 
+0174   3030           00415 INICIA_LCD:     MOVLW 0x30
+0175   2185           00416                         CALL COMANDO
+0176   219E           00417                         CALL RET100MS
+0177   3030           00418                         MOVLW 0x30
+0178   2185           00419                         CALL COMANDO
+0179   219E           00420                         CALL RET100MS
+017A   3038           00421                         MOVLW 0x38
+017B   2185           00422                         CALL COMANDO
+017C   300C           00423                         MOVLW 0x0C
+017D   2185           00424                         CALL COMANDO
+017E   3001           00425                         MOVLW 0x01
+017F   2185           00426                         CALL COMANDO
+0180   3006           00427                         MOVLW 0x06
+0181   2185           00428                         CALL COMANDO
+0182   3002           00429                         MOVLW 0x02
+0183   2185           00430                         CALL COMANDO
+0184   0008           00431                         RETURN
+0185   0086           00432 COMANDO:        MOVWF PORTB
+0186   2195           00433                         CALL RET200
+0187   1005           00434                         BCF PORTA,0
+0188   1485           00435                         BSF     PORTA,1
+0189   2195           00436                         CALL RET200
+018A   1085           00437                         BCF PORTA,1
+018B   0008           00438                         RETURN
+018C   0086           00439 DATOS:          MOVWF PORTB
+018D   2195           00440                         CALL RET200
+018E   1405           00441                         BSF PORTA,0
+018F   1485           00442                         BSF     PORTA,1
+0190   2195           00443                         CALL RET200
+0191   1085           00444                         BCF PORTA,1
+MPASM  5.51                     PROYECTO2.ASM   4-30-2023  22:23:28         PAGE 10
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0192   2195           00445                         CALL RET200
+0193   2195           00446                         CALL RET200
+0194   0008           00447                         RETURN
+0195   30AA           00448 RET200:         MOVLW 0xAA
+0196   00A1           00449                         MOVWF valor1
+0197   30A4           00450 LOOP:           MOVLW d'164'
+0198   00A0           00451                         MOVWF valor
+0199   0BA0           00452 LOOP1:          DECFSZ valor,1
+019A   2999           00453                         GOTO LOOP1
+019B   0BA1           00454                         DECFSZ valor1,1
+019C   2997           00455                         GOTO LOOP
+019D   0008           00456                         RETURN
+019E   3003           00457 RET100MS:       MOVLW 0x03
+019F   00A0           00458                         MOVWF valor
+01A0   30FF           00459 TRES:           MOVLW 0xFF
+01A1   00A1           00460                         MOVWF valor1
+01A2   30FF           00461 DOS:            MOVLW 0xFF
+01A3   00A2           00462                         MOVWF valor2
+Message[305]: Using default destination of 1 (file).
+01A4   0BA2           00463 UNO:            DECFSZ valor2
+01A5   29A4           00464                         GOTO UNO
+Message[305]: Using default destination of 1 (file).
+01A6   0BA1           00465                         DECFSZ valor1
+01A7   29A2           00466                         GOTO DOS
+Message[305]: Using default destination of 1 (file).
+01A8   0BA0           00467                         DECFSZ valor
+01A9   29A0           00468                         GOTO TRES
+01AA   0008           00469                         RETURN
+                      00470                         END                     
+MPASM  5.51                     PROYECTO2.ASM   4-30-2023  22:23:28         PAGE 11
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+ACKDT                             00000005
+ACKEN                             00000004
+ACKSTAT                           00000006
+ADCON0                            0000001F
+ADCON1                            0000009F
+ADCS0                             00000006
+ADCS1                             00000007
+ADDEN                             00000003
+ADFM                              00000007
+ADIE                              00000006
+ADIF                              00000006
+ADON                              00000000
+ADRESH                            0000001E
+ADRESL                            0000009E
+BCLIE                             00000003
+BCLIF                             00000003
+BF                                00000000
+BINARIO                           000000D8
+BRGH                              00000002
+C                                 00000000
+CARACTER                          0000010C
+CASO0                             000000B5
+CASO1                             000000B7
+CASO2                             000000B9
+CASO3                             000000BB
+CASO4                             000000BD
+CASO5                             000000BF
+CASO6                             000000C1
+CASO7                             000000C3
+CASO8                             000000C5
+CASO9                             000000C7
+CASOA                             000000C9
+CASOB                             000000CB
+CASOC                             000000CD
+CASOD                             000000CF
+CASOE                             000000D1
+CASOF                             000000D3
+CCP1CON                           00000017
+CCP1IE                            00000002
+CCP1IF                            00000002
+CCP1M0                            00000000
+CCP1M1                            00000001
+CCP1M2                            00000002
+CCP1M3                            00000003
+CCP1X                             00000005
+CCP1Y                             00000004
+CCP2CON                           0000001D
+CCP2IE                            00000000
+CCP2IF                            00000000
+CCP2M0                            00000000
+CCP2M1                            00000001
+CCP2M2                            00000002
+CCP2M3                            00000003
+MPASM  5.51                     PROYECTO2.ASM   4-30-2023  22:23:28         PAGE 12
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+CCP2X                             00000005
+CCP2Y                             00000004
+CCPR1                             00000015
+CCPR1H                            00000016
+CCPR1L                            00000015
+CCPR2                             0000001B
+CCPR2H                            0000001C
+CCPR2L                            0000001B
+CHS0                              00000003
+CHS1                              00000004
+CHS2                              00000005
+CKE                               00000006
+CKP                               00000004
+COMANDO                           00000185
+CONVEND                           000000D5
+CONVERHEXA                        000000A3
+CREN                              00000004
+CSRC                              00000007
+CentesimaEncontrada               00000082
+D                                 00000005
+DATA_ADDRESS                      00000005
+DATOS                             0000018C
+DC                                00000001
+DECIMAL                           00000058
+DEFAULT                           00000173
+DOS                               000001A2
+D_A                               00000005
+D_NOT_A                           00000005
+DecimaEncontrada                  00000084
+EEADR                             0000010D
+EEADRH                            0000010F
+EECON1                            0000018C
+EECON2                            0000018D
+EEDATA                            0000010C
+EEDATH                            0000010E
+EEIE                              00000004
+EEIF                              00000004
+EEPGD                             00000007
+ES_CERO                           00000109
+ES_UNO                            00000106
+F                                 00000001
+FERR                              00000002
+FSR                               00000004
+GCEN                              00000007
+GIE                               00000007
+GO                                00000002
+GO_DONE                           00000002
+GO_NOT_DONE                       00000002
+HEXADECIMAL                       00000086
+HOLD_BIN                          000000FC
+HOLD_CAR                          0000004E
+HOLD_DECIMAL                      00000078
+HOLD_HEX                          00000099
+MPASM  5.51                     PROYECTO2.ASM   4-30-2023  22:23:28         PAGE 13
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+I2C_DATA                          00000005
+I2C_READ                          00000002
+I2C_START                         00000003
+I2C_STOP                          00000004
+IBF                               00000007
+IBOV                              00000005
+INDF                              00000000
+INICIA_LCD                        00000174
+INICIO                            00000005
+INTCON                            0000000B
+INTE                              00000004
+INTEDG                            00000006
+INTF                              00000001
+IRP                               00000007
+LOOP                              00000197
+LOOP1                             00000199
+LOOP_Centesimas                   00000061
+LOOP_Decimas                      00000067
+LOOP_P                            0000001C
+MostrarDigitos                    0000006F
+NOMBRES                           00000027
+NOT_A                             00000005
+NOT_ADDRESS                       00000005
+NOT_BO                            00000000
+NOT_BOR                           00000000
+NOT_DONE                          00000002
+NOT_PD                            00000003
+NOT_POR                           00000001
+NOT_RBPU                          00000007
+NOT_RC8                           00000006
+NOT_T1SYNC                        00000002
+NOT_TO                            00000004
+NOT_TX8                           00000006
+NOT_W                             00000002
+NOT_WRITE                         00000002
+OBF                               00000006
+OERR                              00000001
+OPTION_REG                        00000081
+P                                 00000004
+PCFG0                             00000000
+PCFG1                             00000001
+PCFG2                             00000002
+PCFG3                             00000003
+PCL                               00000002
+PCLATH                            0000000A
+PCON                              0000008E
+PEIE                              00000006
+PEN                               00000002
+PIE1                              0000008C
+PIE2                              0000008D
+PIR1                              0000000C
+PIR2                              0000000D
+PORTA                             00000005
+MPASM  5.51                     PROYECTO2.ASM   4-30-2023  22:23:28         PAGE 14
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+PORTB                             00000006
+PORTC                             00000007
+PORTD                             00000008
+PORTE                             00000009
+PR2                               00000092
+PS0                               00000000
+PS1                               00000001
+PS2                               00000002
+PSA                               00000003
+PSPIE                             00000007
+PSPIF                             00000007
+PSPMODE                           00000004
+R                                 00000002
+RA0                               00000000
+RA1                               00000001
+RA2                               00000002
+RA3                               00000003
+RA4                               00000004
+RA5                               00000005
+RB0                               00000000
+RB1                               00000001
+RB2                               00000002
+RB3                               00000003
+RB4                               00000004
+RB5                               00000005
+RB6                               00000006
+RB7                               00000007
+RBIE                              00000003
+RBIF                              00000000
+RC0                               00000000
+RC1                               00000001
+RC2                               00000002
+RC3                               00000003
+RC4                               00000004
+RC5                               00000005
+RC6                               00000006
+RC7                               00000007
+RC8_9                             00000006
+RC9                               00000006
+RCD8                              00000000
+RCEN                              00000003
+RCIE                              00000005
+RCIF                              00000005
+RCREG                             0000001A
+RCSTA                             00000018
+RD                                00000000
+RD0                               00000000
+RD1                               00000001
+RD2                               00000002
+RD3                               00000003
+RD4                               00000004
+RD5                               00000005
+RD6                               00000006
+MPASM  5.51                     PROYECTO2.ASM   4-30-2023  22:23:28         PAGE 15
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+RD7                               00000007
+RE0                               00000000
+RE1                               00000001
+RE2                               00000002
+READ_WRITE                        00000002
+RET100MS                          0000019E
+RET200                            00000195
+RP0                               00000005
+RP1                               00000006
+RSEN                              00000001
+RX9                               00000006
+RX9D                              00000000
+R_NOT_W                           00000002
+R_W                               00000002
+S                                 00000003
+SEN                               00000000
+SMP                               00000007
+SPBRG                             00000099
+SPEN                              00000007
+SREN                              00000005
+SSPADD                            00000093
+SSPBUF                            00000013
+SSPCON                            00000014
+SSPCON2                           00000091
+SSPEN                             00000005
+SSPIE                             00000003
+SSPIF                             00000003
+SSPM0                             00000000
+SSPM1                             00000001
+SSPM2                             00000002
+SSPM3                             00000003
+SSPOV                             00000006
+SSPSTAT                           00000094
+STATUS                            00000003
+SYNC                              00000004
+T0CS                              00000005
+T0IE                              00000005
+T0IF                              00000002
+T0SE                              00000004
+T1CKPS0                           00000004
+T1CKPS1                           00000005
+T1CON                             00000010
+T1INSYNC                          00000002
+T1OSCEN                           00000003
+T1SYNC                            00000002
+T2CKPS0                           00000000
+T2CKPS1                           00000001
+T2CON                             00000012
+TMR0                              00000001
+TMR0IE                            00000005
+TMR0IF                            00000002
+TMR1                              0000000E
+TMR1CS                            00000001
+MPASM  5.51                     PROYECTO2.ASM   4-30-2023  22:23:28         PAGE 16
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+TMR1H                             0000000F
+TMR1IE                            00000000
+TMR1IF                            00000000
+TMR1L                             0000000E
+TMR1ON                            00000000
+TMR2                              00000011
+TMR2IE                            00000001
+TMR2IF                            00000001
+TMR2ON                            00000002
+TOUTPS0                           00000003
+TOUTPS1                           00000004
+TOUTPS2                           00000005
+TOUTPS3                           00000006
+TRES                              000001A0
+TRISA                             00000085
+TRISA0                            00000000
+TRISA1                            00000001
+TRISA2                            00000002
+TRISA3                            00000003
+TRISA4                            00000004
+TRISA5                            00000005
+TRISB                             00000086
+TRISB0                            00000000
+TRISB1                            00000001
+TRISB2                            00000002
+TRISB3                            00000003
+TRISB4                            00000004
+TRISB5                            00000005
+TRISB6                            00000006
+TRISB7                            00000007
+TRISC                             00000087
+TRISC0                            00000000
+TRISC1                            00000001
+TRISC2                            00000002
+TRISC3                            00000003
+TRISC4                            00000004
+TRISC5                            00000005
+TRISC6                            00000006
+TRISC7                            00000007
+TRISD                             00000088
+TRISD0                            00000000
+TRISD1                            00000001
+TRISD2                            00000002
+TRISD3                            00000003
+TRISD4                            00000004
+TRISD5                            00000005
+TRISD6                            00000006
+TRISD7                            00000007
+TRISE                             00000089
+TRISE0                            00000000
+TRISE1                            00000001
+TRISE2                            00000002
+TRMT                              00000001
+MPASM  5.51                     PROYECTO2.ASM   4-30-2023  22:23:28         PAGE 17
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+TX8_9                             00000006
+TX9                               00000006
+TX9D                              00000000
+TXD8                              00000000
+TXEN                              00000005
+TXIE                              00000004
+TXIF                              00000004
+TXREG                             00000019
+TXSTA                             00000098
+UA                                00000001
+UNO                               000001A4
+W                                 00000000
+WCOL                              00000007
+WR                                00000001
+WREN                              00000002
+WRERR                             00000003
+Z                                 00000002
+_BODEN_OFF                        00003FBF
+_BODEN_ON                         00003FFF
+_BOREN_OFF                        00003FBF
+_BOREN_ON                         00003FFF
+_CONFIG                           00002007
+_CPD_OFF                          00003FFF
+_CPD_ON                           00003EFF
+_CP_ALL                           00000FCF
+_CP_HALF                          00001FDF
+_CP_OFF                           00003FFF
+_CP_UPPER_256                     00002FEF
+_DEBUG_OFF                        00003FFF
+_DEBUG_ON                         000037FF
+_DEVID1                           00002006
+_FOSC_EXTRC                       00003FFF
+_FOSC_HS                          00003FFE
+_FOSC_LP                          00003FFC
+_FOSC_XT                          00003FFD
+_HS_OSC                           00003FFE
+_IDLOC0                           00002000
+_IDLOC1                           00002001
+_IDLOC2                           00002002
+_IDLOC3                           00002003
+_LP_OSC                           00003FFC
+_LVP_OFF                          00003F7F
+_LVP_ON                           00003FFF
+_PWRTE_OFF                        00003FFF
+_PWRTE_ON                         00003FF7
+_RC_OSC                           00003FFF
+_WDTE_OFF                         00003FFB
+_WDTE_ON                          00003FFF
+_WDT_OFF                          00003FFB
+_WDT_ON                           00003FFF
+_WRT_ENABLE_OFF                   00003DFF
+_WRT_ENABLE_ON                    00003FFF
+_WRT_OFF                          00003DFF
+MPASM  5.51                     PROYECTO2.ASM   4-30-2023  22:23:28         PAGE 18
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+_WRT_ON                           00003FFF
+_XT_OSC                           00003FFD
+__16F877A                         00000001
+aux                               00000028
+contadorCentesima                 00000023
+contadorDecima                    00000024
+contadorUnidad                    00000025
+regaux                            00000026
+regaux2                           00000027
+valor                             00000020
+valor1                            00000021
+valor2                            00000022
+
+
+MEMORY USAGE MAP ('X' = Used,  '-' = Unused)
+
+0000 : X----XXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+0040 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+0080 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+00C0 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+0100 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+0140 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+0180 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXX----- ----------------
+
+All other memory blocks unused.
+
+Program Memory Words Used:   423
+Program Memory Words Free:  7769
+
+
+Errors   :     0
+Warnings :     0 reported,     0 suppressed
+Messages :    16 reported,     0 suppressed
+
+
