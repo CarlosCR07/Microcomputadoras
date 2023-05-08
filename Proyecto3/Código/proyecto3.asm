@@ -473,50 +473,67 @@ RETOMACV:	RETURN
 
 V0:			MOVLW a'0'		;Imprime el valor 0 en el LCD
 			CALL DATOS
+			MOVLW h'0'
 			MOVWF resNivel	;Almacenamos el nivel entero para evaluar en carga de pila o voltaje
 			RETURN
 V1:			MOVLW a'1'		;Imprime el valor 1 en el LCD
 			CALL DATOS
+			MOVLW h'1'
 			MOVWF resNivel	;Almacenamos el nivel entero para evaluar en carga de pila o voltaje
 			RETURN
 V2:			MOVLW a'2'		;Imprime el valor 2 en el LCD
 			CALL DATOS
+			MOVLW h'2'
 			MOVWF resNivel	;Almacenamos el nivel entero para evaluar en carga de pila o voltaje
 			RETURN
 V3:			MOVLW a'3'		;Imprime el valor 3 en el LCD
 			CALL DATOS
+			MOVLW h'3'
 			MOVWF resNivel	;Almacenamos el nivel entero para evaluar en carga de pila o voltaje
 			RETURN
 V4:			MOVLW a'4'		;Imprime el valor 4 en el LCD
 			CALL DATOS
+			MOVLW h'4'
 			MOVWF resNivel	;Almacenamos el nivel entero para evaluar en carga de pila o voltaje
 			RETURN
 V5:			MOVLW a'5'		;Imprime el valor 5 en el LCD
 			CALL DATOS
+			MOVLW h'5'
 			MOVWF resNivel	;Almacenamos el nivel entero para evaluar en carga de pila o voltaje
 			RETURN
 V6:			MOVLW a'6'		;Imprime el valor 6 en el LCD
 			CALL DATOS
+			MOVLW h'6'
 			MOVWF resNivel	;Almacenamos el nivel entero para evaluar en carga de pila o voltaje
 			RETURN
 V7:			MOVLW a'7'		;Imprime el valor 7 en el LCD
 			CALL DATOS
+			MOVLW h'7'
 			MOVWF resNivel	;Almacenamos el nivel entero para evaluar en carga de pila o voltaje
 			RETURN
 V8:			MOVLW a'8'		;Imprime el valor 8 en el LCD
 			CALL DATOS
+			MOVLW h'8'
 			MOVWF resNivel	;Almacenamos el nivel entero para evaluar en carga de pila o voltaje
 			RETURN
 V9:			MOVLW a'9'		;Imprime el valor 9 en el LCD
 			CALL DATOS
+			MOVLW h'9'
 			MOVWF resNivel	;Almacenamos el nivel entero para evaluar en carga de pila o voltaje
 			RETURN
-CARGA:	MOVLW 0X40 ;ALMACENAR CARACTERES EN CGRAM
+
+CARGA:	CALL UNIVOLT
+		MOVLW 0x01		;Limpia Display
+		CALL COMANDO
+		
+
+		MOVLW 0X40 ;ALMACENAR CARACTERES EN CGRAM
 		CALL COMANDO
 		CALL RET100MS
 		
-		;IF resNivel  = 0
 		;CUADRO 0 - ALMACENANDO - Vacio
+		MOVLW b'00000'
+		CALL DATOS
 		MOVLW b'01110'
 		CALL DATOS
 		MOVLW b'01010'
@@ -532,8 +549,9 @@ CARGA:	MOVLW 0X40 ;ALMACENAR CARACTERES EN CGRAM
 		MOVLW b'11111'
 		CALL DATOS
 
-		;IF resNivel  = 1
 		;CUADRO 1 - ALMACENANDO - Nivel 1
+		MOVLW b'00000'
+		CALL DATOS
 		MOVLW b'01110'
 		CALL DATOS
 		MOVLW b'01010'
@@ -549,8 +567,9 @@ CARGA:	MOVLW 0X40 ;ALMACENAR CARACTERES EN CGRAM
 		MOVLW b'11111'
 		CALL DATOS		
 
-		;IF resNivel  = 2
 		;CUADRO 2 - ALMACENANDO - Nivel 2
+		MOVLW b'00000'
+		CALL DATOS
 		MOVLW b'01110'
 		CALL DATOS
 		MOVLW b'01010'
@@ -566,8 +585,9 @@ CARGA:	MOVLW 0X40 ;ALMACENAR CARACTERES EN CGRAM
 		MOVLW b'11111'
 		CALL DATOS	
 
-		;IF resNivel  = 3
 		;CUADRO 3 - ALMACENANDO - Nivel 3
+		MOVLW b'00000'
+		CALL DATOS
 		MOVLW b'01110'
 		CALL DATOS
 		MOVLW b'01010'
@@ -583,8 +603,9 @@ CARGA:	MOVLW 0X40 ;ALMACENAR CARACTERES EN CGRAM
 		MOVLW b'11111'
 		CALL DATOS	
 
-		;IF resNivel  = 4
 		;CUADRO 4 - ALMACENANDO - Nivel 4
+		MOVLW b'00000'
+		CALL DATOS
 		MOVLW b'01110'
 		CALL DATOS
 		MOVLW b'01010'
@@ -600,8 +621,9 @@ CARGA:	MOVLW 0X40 ;ALMACENAR CARACTERES EN CGRAM
 		MOVLW b'11111'
 		CALL DATOS	
 
-		;IF resNivel  = 5
 		;CUADRO 5 - ALMACENANDO - Nivel 5
+		MOVLW b'00000'
+		CALL DATOS
 		MOVLW b'01110'
 		CALL DATOS
 		MOVLW b'01110'
@@ -622,17 +644,26 @@ CARGA:	MOVLW 0X40 ;ALMACENAR CARACTERES EN CGRAM
 		CALL COMANDO
 		CALL RET100MS
 
-		CALL UNIVOLT		;Caso para ver la "carga de pila"
-		MOVF resNivel,w
-		ADDWF PCL,F		;(PCL)<-- (PCL)+W
-		GOTO BATERIA0		;PC+0	Caso 000: Numero 0
-		GOTO BATERIA1		;PC+1	Caso 001: Numero 1
-		GOTO BATERIA2		;PC+2	Caso 010: Numero 2
-		GOTO BATERIA3		;PC+3	Caso 011: Numero 3
-		GOTO BATERIA4		;PC+4	Caso 100: Numero 4
-		GOTO BATERIA5		;PC+5	Caso 101: Numero 5
 
-BATERIA0: MOVLW 0X00 ;Cuadro 0 - Vacio
+		MOVLW h'1'
+		SUBWF resNivel	;resNivel-1	
+		BTFSC STATUS,Z	;== 0?
+		GOTO BATERIA1   ;SI
+		SUBWF resNivel	;Else, resNivel-1	
+		BTFSC STATUS,Z	;== 0?
+		GOTO BATERIA2	;SI
+		SUBWF resNivel	;Else, resNivel-1	
+		BTFSC STATUS,Z	;== 0?
+		GOTO BATERIA3	;SI
+		SUBWF resNivel	;Else, resNivel-1	
+		BTFSC STATUS,Z	;== 0?
+		GOTO BATERIA4	;SI
+		SUBWF resNivel	;Else, resNivel-1	
+		BTFSC STATUS,Z	;== 0?
+		GOTO BATERIA5	;SI		
+		GOTO BATERIA0	;.-. Sepa a donde fue
+
+BATERIA0:MOVLW 0x00 ;Cuadro 0 - Vacio
 		  CALL DATOS
 		  GOTO HOLD_CAR
 
