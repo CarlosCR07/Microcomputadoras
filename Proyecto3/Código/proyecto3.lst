@@ -1,4 +1,4 @@
-MPASM  5.51                     PROYECTO3.ASM   5-7-2023  21:03:51         PAGE  1
+MPASM 03.80 Released                            PROYECTO3.ASM   5-8-2023  0:30:28         PAGE  1
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -7,15 +7,8 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00001                 PROCESSOR 16F877
                       00002                 INCLUDE <P16F877.INC>
                       00001         LIST
-                      00002 
-                      00003 ;==========================================================================
-                      00004 ;  MPASM PIC16F877 processor include
-                      00005 ; 
-                      00006 ;  (c) Copyright 1999-2013 Microchip Technology, All rights reserved
-                      00007 ;==========================================================================
-                      00008 
-Message[301]: MESSAGE: (Processor-header file mismatch.  Verify selected processor.)
-                      00540         LIST
+                      00002 ; P16F877.INC  Standard Header File, Version 1.00    Microchip Technology, Inc.
+                      00373         LIST
                       00003                 
   00000020            00004 valor   equ h'20'                       ;Registros auxiliares para rutina de retardo
   00000021            00005 valor1  equ h'21'
@@ -57,12 +50,6 @@ Message[302]: Register in operand not in bank 0.  Ensure that bank bits are corr
                              
 Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
 0014   0185           00037                         CLRF TRISA              ;limpia TRISA, todos los pines son salidas
-MPASM  5.51                     PROYECTO3.ASM   5-7-2023  21:03:51         PAGE  2
-
-
-LOC  OBJECT CODE     LINE SOURCE TEXT
-  VALUE
-
 Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
 0015   1405           00038                         BSF TRISA,0             ;el bit 0 de PORTA es entrada
 0016   300E           00039                         MOVLW 0x0E              ;1110, hace al bit 0 del puerto A analógico y el resto d
@@ -70,16 +57,22 @@ Message[302]: Register in operand not in bank 0.  Ensure that bank bits are corr
 Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
 0017   009F           00040                         MOVWF ADCON1    ;ADCON1 <- 0x0E, configura puerto A y E como entradas digitales 
                             exceptuando el bit 0 del puerto A
+MPASM 03.80 Released                            PROYECTO3.ASM   5-8-2023  0:30:28         PAGE  2
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
 0018   1283           00041                         BCF STATUS,5    ;Regresamos al banco 0
-0019   2258           00042                         CALL INICIA_LCD
+0019   2279           00042                         CALL INICIA_LCD
 001A   3080           00043                         MOVLW 0x80
-001B   2269           00044                         CALL COMANDO
+001B   228A           00044                         CALL COMANDO
 001C   3001           00045                         MOVLW B'00000001' ;ADFM=0,se configura el canal 0 (PORTA.0) como la entrada al c
                             onvertidor. Frecuencia de oscilador Fosc/2, se enciende el modulo convertidor
 001D   009F           00046                         MOVWF ADCON0    ;ADCON0<-W
-001E   228F           00047                         CALL RETARDO    ;retardo de 50us
+001E   22B0           00047                         CALL RETARDO    ;retardo de 50us
                       00048                         
-001F   228F           00049 LOOP_P:         CALL RETARDO
+001F   22B0           00049 LOOP_P:         CALL RETARDO
 0020   151F           00050                         BSF ADCON0,GO   ;ADCON0.GO<- 1, iniciamos la conversion
 0021   191F           00051 ESPERA:         BTFSC ADCON0,GO ;¿ADCON0.GO==0?
 0022   2821           00052                         GOTO ESPERA             ;se retiene hasta que termine la conversion     
@@ -96,32 +89,26 @@ Message[302]: Register in operand not in bank 0.  Ensure that bank bits are corr
 002A   28B7           00060                         GOTO BINARIO    ;PC+2   -> Switches: 010        Conversión entrada dipswitch de 
                             8 bits a binario
 002B   28EC           00061                         GOTO VOLTAJE    ;PC+3   -> Switches: 011        
-002C   29D8           00062                         GOTO CARGA              ;PC+4   -> Switches: 100
+002C   29E2           00062                         GOTO CARGA              ;PC+4   -> Switches: 100
 002D   2830           00063                         GOTO PRUEBA             ;PC+5 -> Switches: 101
-002E   2A57           00064                         GOTO DEFAULT    ;PC+6 -> -> Switches: 110
-002F   2A57           00065                         GOTO DEFAULT    ;PC+7 -> -> Switches: 111
+002E   2A78           00064                         GOTO DEFAULT    ;PC+6 -> -> Switches: 110
+002F   2A78           00065                         GOTO DEFAULT    ;PC+7 -> -> Switches: 111
                       00066 
 0030   3050           00067 PRUEBA:         MOVLW a'P'
-0031   2270           00068                         CALL DATOS
+0031   2291           00068                         CALL DATOS
 0032   3001           00069                         MOVLW 0x01                              ;NO, Limpia Display
-0033   2269           00070                         CALL COMANDO
+0033   228A           00070                         CALL COMANDO
 0034   3080           00071                         MOVLW 0x80                      ;regresa a inicio linea 1
-0035   2269           00072                         CALL COMANDO
+0035   228A           00072                         CALL COMANDO
 0036   281F           00073                         GOTO LOOP_P
 0037   01A3           00074 DECIMAL:        CLRF contadorCentesima          ;Inicializa en 0
 0038   01A4           00075                         CLRF contadorDecima                     ;Inicializa en 0
 0039   01A5           00076                         CLRF contadorUnidad                     ;Inicializa en 0
 003A   3044           00077                         MOVLW a'D'
-003B   2270           00078                         CALL DATOS
+003B   2291           00078                         CALL DATOS
 003C   303A           00079                         MOVLW 0x3A              ;Dos puntos
-003D   2270           00080                         CALL DATOS
+003D   2291           00080                         CALL DATOS
 003E   0829           00081                         MOVF conver,W   ;Leer el valor de los switches y lo almacena en aux
-MPASM  5.51                     PROYECTO3.ASM   5-7-2023  21:03:51         PAGE  3
-
-
-LOC  OBJECT CODE     LINE SOURCE TEXT
-  VALUE
-
 003F   00A7           00082                         MOVWF aux       
                       00083         
 0040   3064           00084 LOOP_Centesimas:MOVLW 0x64                              ;Restar 100
@@ -129,6 +116,12 @@ Message[305]: Using default destination of 1 (file).
 0041   02A7           00085                                 SUBWF aux
 0042   1803           00086                                 BTFSC STATUS,C                  ;Verifica el estado de carry
 0043   2861           00087                                 GOTO CentesimaEncontrada        ;SI hay carry, el resultado es un número
+MPASM 03.80 Released                            PROYECTO3.ASM   5-8-2023  0:30:28         PAGE  3
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
                              positivo                               
 0044   3064           00088                                 MOVLW 0x64
 Message[305]: Using default destination of 1 (file).
@@ -149,22 +142,22 @@ Message[305]: Using default destination of 1 (file).
                       00098 
 004E   0823           00099 MostrarDigitos: MOVF contadorCentesima,W        
 004F   3E30           00100                                 ADDLW 0x30                                      ;Obtener valor ASCII
-0050   2270           00101                                 CALL DATOS                                      ;Display Centesimas
+0050   2291           00101                                 CALL DATOS                                      ;Display Centesimas
 0051   0824           00102                                 MOVF contadorDecima,W           
 0052   3E30           00103                                 ADDLW 0x30                                      ;Obtener valor ASCII
-0053   2270           00104                                 CALL DATOS                                      ;Display Decimas
+0053   2291           00104                                 CALL DATOS                                      ;Display Decimas
 0054   0825           00105                                 MOVF contadorUnidad,W           
 0055   3E30           00106                                 ADDLW 0x30                                      ;Obtener valor ASCII
-0056   2270           00107                                 CALL DATOS                                      ;Display Unidades
+0056   2291           00107                                 CALL DATOS                                      ;Display Unidades
                       00108 
 0057   0809           00109 HOLD_DECIMAL:   MOVF PORTE,W
 0058   3C01           00110                                 SUBLW 0x01              ;W<--W-0x10
 0059   1903           00111                                 BTFSC STATUS,Z          ;¿(CONTA)=0X10?
 005A   2857           00112                                 GOTO HOLD_DECIMAL               ;SI                     
 005B   3001           00113                                 MOVLW 0x01                              ;NO, Limpia Display
-005C   2269           00114                                 CALL COMANDO
+005C   228A           00114                                 CALL COMANDO
 005D   3080           00115                                 MOVLW 0x80                      ;regresa a inicio linea 1
-005E   2269           00116                                 CALL COMANDO
+005E   228A           00116                                 CALL COMANDO
 005F   0180           00117                                 CLRF W
 0060   281F           00118                                 GOTO LOOP_P     
                       00119 
@@ -175,19 +168,19 @@ Message[305]: Using default destination of 1 (file).
 Message[305]: Using default destination of 1 (file).
 0063   0AA4           00123 DecimaEncontrada:       INCF contadorDecima     
 0064   2846           00124                                         GOTO LOOP_Decimas
-MPASM  5.51                     PROYECTO3.ASM   5-7-2023  21:03:51         PAGE  4
+                      00125 
+0065   3048           00126 HEXADECIMAL:MOVLW a'H'
+0066   2291           00127                         CALL DATOS
+0067   303A           00128                         MOVLW 0x3A              ;Dos puntos
+0068   2291           00129                         CALL DATOS
+0069   0180           00130                         CLRF W
+006A   0829           00131                         MOVF conver,W
+MPASM 03.80 Released                            PROYECTO3.ASM   5-8-2023  0:30:28         PAGE  4
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
-                      00125 
-0065   3048           00126 HEXADECIMAL:MOVLW a'H'
-0066   2270           00127                         CALL DATOS
-0067   303A           00128                         MOVLW 0x3A              ;Dos puntos
-0068   2270           00129                         CALL DATOS
-0069   0180           00130                         CLRF W
-006A   0829           00131                         MOVF conver,W
 006B   00A8           00132                         MOVWF regaux2
 006C   0828           00133                         MOVF regaux2,W  ;restauramos el valor guardado por si acaso sufriese algun cambi
                             o
@@ -208,9 +201,9 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 007A   1903           00147                         BTFSC STATUS,Z  ;¿(CONTA)=0X20?
 007B   2878           00148                         GOTO HOLD_HEX   ;SI                     
 007C   3001           00149                         MOVLW 0x01              ;NO, Limpia Display
-007D   2269           00150                         CALL COMANDO
+007D   228A           00150                         CALL COMANDO
 007E   3080           00151                         MOVLW 0x80              ;regresa a inicio linea 1
-007F   2269           00152                         CALL COMANDO
+007F   228A           00152                         CALL COMANDO
 0080   0180           00153                         CLRF W
 0081   281F           00154                         GOTO LOOP_P     
 0082   0827           00155 CONVERHEXA:     MOVF regaux,W   ; W<- (regaux)
@@ -234,12 +227,6 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 0092   28B0           00172                         GOTO CASOE              ;PC+14  Caso 1110: Letra E 
 0093   28B2           00173                         GOTO CASOF              ;PC+15  Caso 1111: Letra F 
 0094   3030           00174 CASO0:          MOVLW a'0'
-MPASM  5.51                     PROYECTO3.ASM   5-7-2023  21:03:51         PAGE  5
-
-
-LOC  OBJECT CODE     LINE SOURCE TEXT
-  VALUE
-
 0095   28B4           00175                         GOTO CONVEND
 0096   3031           00176 CASO1:          MOVLW a'1'
 0097   28B4           00177                         GOTO CONVEND
@@ -247,6 +234,12 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 0099   28B4           00179                         GOTO CONVEND
 009A   3033           00180 CASO3:          MOVLW a'3'
 009B   28B4           00181                         GOTO CONVEND
+MPASM 03.80 Released                            PROYECTO3.ASM   5-8-2023  0:30:28         PAGE  5
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
 009C   3034           00182 CASO4:          MOVLW a'4'
 009D   28B4           00183                         GOTO CONVEND
 009E   3035           00184 CASO5:          MOVLW a'5'
@@ -272,15 +265,15 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 00B2   3046           00204 CASOF:          MOVLW a'F'
 00B3   28B4           00205                         GOTO CONVEND
                       00206 
-00B4   2270           00207 CONVEND:        CALL DATOS              ; Imprimimos el simbolo en el LCD
+00B4   2291           00207 CONVEND:        CALL DATOS              ; Imprimimos el simbolo en el LCD
 00B5   0180           00208                         CLRF W
 00B6   0008           00209                         RETURN
                       00210 
 00B7   0829           00211 BINARIO:        MOVF conver,W
 00B8   3042           00212                         MOVLW a'B'
-00B9   2270           00213                         CALL DATOS
+00B9   2291           00213                         CALL DATOS
 00BA   303A           00214                         MOVLW 0x3A              ;Dos puntos
-00BB   2270           00215                         CALL DATOS
+00BB   2291           00215                         CALL DATOS
                       00216                         ;CLRF conver            ;PRUEBA DE FUNCIÓN
 00BC   1BA9           00217                         BTFSC conver,7
 00BD   20E6           00218                         CALL ES_UNO
@@ -293,12 +286,6 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 00C4   1AA9           00225                         BTFSC conver,5
 00C5   20E6           00226                         CALL ES_UNO
 00C6   1EA9           00227                         BTFSS conver,5
-MPASM  5.51                     PROYECTO3.ASM   5-7-2023  21:03:51         PAGE  6
-
-
-LOC  OBJECT CODE     LINE SOURCE TEXT
-  VALUE
-
 00C7   20E9           00228                         CALL ES_CERO
 00C8   1A29           00229                         BTFSC conver,4
 00C9   20E6           00230                         CALL ES_UNO
@@ -306,6 +293,12 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 00CB   20E9           00232                         CALL ES_CERO
 00CC   19A9           00233                         BTFSC conver,3
 00CD   20E6           00234                         CALL ES_UNO
+MPASM 03.80 Released                            PROYECTO3.ASM   5-8-2023  0:30:28         PAGE  6
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
 00CE   1DA9           00235                         BTFSS conver,3
 00CF   20E9           00236                         CALL ES_CERO
 00D0   1929           00237                         BTFSC conver,2
@@ -325,47 +318,47 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 00DE   1903           00251                         BTFSC STATUS,Z  ;¿(CONTA)=0X30?
 00DF   28DC           00252                         GOTO HOLD_BIN ;SI                       
 00E0   3001           00253                         MOVLW 0x01              ;Limpia Display
-00E1   2269           00254                         CALL COMANDO
+00E1   228A           00254                         CALL COMANDO
 00E2   3080           00255                         MOVLW 0x80              ;regresa a inicio linea 1
-00E3   2269           00256                         CALL COMANDO
+00E3   228A           00256                         CALL COMANDO
 00E4   0180           00257                         CLRF W
 00E5   281F           00258                         GOTO LOOP_P             
 00E6   3031           00259 ES_UNO:         MOVLW a'1'
-00E7   2270           00260                         CALL DATOS
+00E7   2291           00260                         CALL DATOS
 00E8   0008           00261                         RETURN
 00E9   3030           00262 ES_CERO         MOVLW a'0'
-00EA   2270           00263                         CALL DATOS
+00EA   2291           00263                         CALL DATOS
 00EB   0008           00264                         RETURN
                       00265 
 00EC   2105           00266 VOLTAJE:        CALL UNIVOLT    ;Caso para mostrar Voltaje leído en decimal. Resolucion de 1
 00ED   302E           00267                         MOVLW a'.'
-00EE   2270           00268                         CALL DATOS
+00EE   2291           00268                         CALL DATOS
 00EF   2137           00269                         CALL DECVOLT
 00F0   218F           00270                         CALL CENVOLT
 00F1   3020           00271                         MOVLW a' '
-00F2   2270           00272                         CALL DATOS
+00F2   2291           00272                         CALL DATOS
 00F3   3056           00273                         MOVLW a'V'
-00F4   2270           00274                         CALL DATOS
+00F4   2291           00274                         CALL DATOS
 00F5   306F           00275                         MOVLW a'o'
-00F6   2270           00276                         CALL DATOS
+00F6   2291           00276                         CALL DATOS
 00F7   306C           00277                         MOVLW a'l'
-00F8   2270           00278                         CALL DATOS
+00F8   2291           00278                         CALL DATOS
 00F9   3073           00279                         MOVLW a's'
-00FA   2270           00280                         CALL DATOS
-MPASM  5.51                     PROYECTO3.ASM   5-7-2023  21:03:51         PAGE  7
-
-
-LOC  OBJECT CODE     LINE SOURCE TEXT
-  VALUE
-
+00FA   2291           00280                         CALL DATOS
 00FB   0809           00281 HOLD_VOL:       MOVF PORTE,W
 00FC   3C03           00282                         SUBLW 0x03 ;  W<--W-0x30
 00FD   1903           00283                         BTFSC STATUS,Z  ;¿(CONTA)=0X30?
 00FE   28FB           00284                         GOTO HOLD_VOL ;SI                       
 00FF   3001           00285                         MOVLW 0x01              ;Limpia Display
-0100   2269           00286                         CALL COMANDO
+0100   228A           00286                         CALL COMANDO
 0101   3080           00287                         MOVLW 0x80              ;regresa a inicio linea 1
-0102   2269           00288                         CALL COMANDO
+MPASM 03.80 Released                            PROYECTO3.ASM   5-8-2023  0:30:28         PAGE  7
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0102   228A           00288                         CALL COMANDO
 0103   0180           00289                         CLRF W
 0104   281F           00290                         GOTO LOOP_P                             
 0105   0829           00291 UNIVOLT:        MOVF conver,W   ; Caso para obtener el nivel entero de volt leido (1-5)
@@ -385,7 +378,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 0111   2917           00303                         GOTO CASO2A                     ;NO, ES MAYOR EL NUMERO
 0112   2913           00304                         GOTO CASO1B                     ;SI, ES MENOR EL NUMERO
                       00305                         
-0113   21B4           00306 CASO1B:         CALL V1 ;1.00-1.99V: 1  la condicion de pertenencia (al haberse evaluado la clase 0) es 
+0113   21B5           00306 CASO1B:         CALL V1 ;1.00-1.99V: 1  la condicion de pertenencia (al haberse evaluado la clase 0) es 
                             ser menor de 2
 0114   3033           00307                         MOVLW 0x33
 0115   00A8           00308                         MOVWF regaux2
@@ -396,7 +389,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 0119   1C03           00313                         BTFSS STATUS,C  ;¿STATUS.C==1?  -> 0x99<W
 011A   2920           00314                         GOTO CASO3A                     ;NO, ES MAYOR EL NUMERO
 011B   291C           00315                         GOTO CASO2B                     ;SI, ES MENOR EL NUMERO
-011C   21B8           00316 CASO2B:         CALL V2                 ;2.00-2.99V: 2  la condicion de pertenencia (al haberse evaluado
+011C   21BA           00316 CASO2B:         CALL V2                 ;2.00-2.99V: 2  la condicion de pertenencia (al haberse evaluado
                              la clase 0) es ser menor de 2
 011D   3066           00317                         MOVLW 0x66
 011E   00A8           00318                         MOVWF regaux2
@@ -406,28 +399,28 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 0122   1C03           00322                         BTFSS STATUS,C  ;¿STATUS.C==1?  -> 0xcc<W
 0123   2929           00323                         GOTO CASO4A                     ;NO, ES MAYOR EL NUMERO
 0124   2925           00324                         GOTO CASO3B                     ;SI, ES MENOR EL NUMERO
-0125   21BC           00325 CASO3B:         CALL V3                 ;3.00-3.99V: 1  la condicion de pertenencia (al haberse evaluado
+0125   21BF           00325 CASO3B:         CALL V3                 ;3.00-3.99V: 1  la condicion de pertenencia (al haberse evaluado
                              la clase 0) es ser menor de 2
 0126   3099           00326                         MOVLW 0x99
 0127   00A8           00327                         MOVWF regaux2
 0128   2936           00328                         GOTO RETOMAV
-MPASM  5.51                     PROYECTO3.ASM   5-7-2023  21:03:51         PAGE  8
-
-
-LOC  OBJECT CODE     LINE SOURCE TEXT
-  VALUE
-
 0129   0829           00329 CASO4A:         MOVF conver,W
 012A   3CFF           00330                         SUBLW 0xFF              ;1111 1010  NIVEL 255
 012B   1C03           00331                         BTFSS STATUS,C  ;¿STATUS.C==1?  -> 0xFF<W
 012C   2932           00332                         GOTO CASO5A             ;NO, ES MAYOR EL NUMERO
 012D   292E           00333                         GOTO CASO4B             ;SI, ES MENOR EL NUMERO
-012E   21C0           00334 CASO4B:         CALL V4                 ;4.00-4.99V: 4  la condicion de pertenencia (al haberse evaluado
+012E   21C4           00334 CASO4B:         CALL V4                 ;4.00-4.99V: 4  la condicion de pertenencia (al haberse evaluado
                              la clase 0) es ser menor de 2
+MPASM 03.80 Released                            PROYECTO3.ASM   5-8-2023  0:30:28         PAGE  8
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
 012F   30CC           00335                         MOVLW 0xCC
 0130   00A8           00336                         MOVWF regaux2
 0131   2936           00337                         GOTO RETOMAV
-0132   21C4           00338 CASO5A:         CALL V5                 ;5V: 5  la condicion de pertenencia (al haberse evaluado la clas
+0132   21C9           00338 CASO5A:         CALL V5                 ;5V: 5  la condicion de pertenencia (al haberse evaluado la clas
                             e 0) es ser menor de 2
 0133   30FF           00339                         MOVLW 0xFF
 0134   00A8           00340                         MOVWF regaux2
@@ -455,7 +448,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 0145   294B           00359                         GOTO CASO2AD                    ;NO, ES MAYOR EL NUMERO
 0146   2947           00360                         GOTO CASO1BD                    ;SI, ES MENOR EL NUMERO
                       00361                         
-0147   21B4           00362 CASO1BD:        CALL V1 ;1.00-1.99V: 1  la condicion de pertenencia (al haberse evaluado la clase 0) es 
+0147   21B5           00362 CASO1BD:        CALL V1 ;1.00-1.99V: 1  la condicion de pertenencia (al haberse evaluado la clase 0) es 
                             ser menor de 2
 0148   3006           00363                         MOVLW 0x06
 0149   00A8           00364                         MOVWF regaux2
@@ -466,23 +459,23 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 014D   1C03           00369                         BTFSS STATUS,C  ;¿STATUS.C==1?  -> 0x99<W
 014E   2954           00370                         GOTO CASO3AD            ;NO, ES MAYOR EL NUMERO
 014F   2950           00371                         GOTO CASO2BD            ;SI, ES MENOR EL NUMERO
-0150   21B8           00372 CASO2BD:        CALL V2                 ;2.00-2.99V: 2  la condicion de pertenencia (al haberse evaluado
+0150   21BA           00372 CASO2BD:        CALL V2                 ;2.00-2.99V: 2  la condicion de pertenencia (al haberse evaluado
                              la clase 0) es ser menor de 2
 0151   300B           00373                         MOVLW 0x0B
 0152   00A8           00374                         MOVWF regaux2
-MPASM  5.51                     PROYECTO3.ASM   5-7-2023  21:03:51         PAGE  9
-
-
-LOC  OBJECT CODE     LINE SOURCE TEXT
-  VALUE
-
 0153   298E           00375                         GOTO RETOMADV
 0154   0827           00376 CASO3AD:        MOVF regaux,W
 0155   3C15           00377                         SUBLW 0x15              ;0x15-W  20 niveles (0.3-0.39)
 0156   1C03           00378                         BTFSS STATUS,C  ;¿STATUS.C==1?  -> 0xcc<W
 0157   295D           00379                         GOTO CASO4AD                    ;NO, ES MAYOR EL NUMERO
 0158   2959           00380                         GOTO CASO3BD                    ;SI, ES MENOR EL NUMERO
-0159   21BC           00381 CASO3BD:        CALL V3                 ;3.00-3.99V: 1  la condicion de pertenencia (al haberse evaluado
+0159   21BF           00381 CASO3BD:        CALL V3                 ;3.00-3.99V: 1  la condicion de pertenencia (al haberse evaluado
+MPASM 03.80 Released                            PROYECTO3.ASM   5-8-2023  0:30:28         PAGE  9
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
                              la clase 0) es ser menor de 2
 015A   3010           00382                         MOVLW 0x10
 015B   00A8           00383                         MOVWF regaux2
@@ -492,7 +485,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 015F   1C03           00387                         BTFSS STATUS,C  ;¿STATUS.C==1?  -> 0xFF<W
 0160   2966           00388                         GOTO CASO5AD            ;NO, ES MAYOR EL NUMERO
 0161   2962           00389                         GOTO CASO4BD            ;SI, ES MENOR EL NUMERO
-0162   21C0           00390 CASO4BD:        CALL V4                 ;4.00-4.99V: 4  la condicion de pertenencia (al haberse evaluado
+0162   21C4           00390 CASO4BD:        CALL V4                 ;4.00-4.99V: 4  la condicion de pertenencia (al haberse evaluado
                              la clase 0) es ser menor de 2
 0163   3015           00391                         MOVLW 0x15
 0164   00A8           00392                         MOVWF regaux2
@@ -502,7 +495,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 0168   1C03           00396                         BTFSS STATUS,C  ;¿STATUS.C==1?  -> 0xFF<W
 0169   296F           00397                         GOTO CASO6AD            ;NO, ES MAYOR EL NUMERO
 016A   296B           00398                         GOTO CASO5BD            ;SI, ES MENOR EL NUMERO
-016B   21C4           00399 CASO5BD:        CALL V5                 
+016B   21C9           00399 CASO5BD:        CALL V5                 
 016C   301A           00400                         MOVLW 0x1A
 016D   00A8           00401                         MOVWF regaux2
 016E   298E           00402                         GOTO RETOMADV
@@ -511,7 +504,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 0171   1C03           00405                         BTFSS STATUS,C  ;¿STATUS.C==1?  -> 0xFF<W
 0172   2978           00406                         GOTO CASO7AD            ;NO, ES MAYOR EL NUMERO
 0173   2974           00407                         GOTO CASO6BD            ;SI, ES MENOR EL NUMERO
-0174   21C8           00408 CASO6BD:        CALL V6                 
+0174   21CE           00408 CASO6BD:        CALL V6                 
 0175   301F           00409                         MOVLW 0x1F
 0176   00A8           00410                         MOVWF regaux2
 0177   298E           00411                         GOTO RETOMADV
@@ -520,7 +513,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 017A   1C03           00414                         BTFSS STATUS,C  ;¿STATUS.C==1?  -> 0xFF<W
 017B   2981           00415                         GOTO CASO8AD            ;NO, ES MAYOR EL NUMERO
 017C   297D           00416                         GOTO CASO7BD            ;SI, ES MENOR EL NUMERO
-017D   21CC           00417 CASO7BD:        CALL V7                 
+017D   21D3           00417 CASO7BD:        CALL V7                 
 017E   3024           00418                         MOVLW 0x24
 017F   00A8           00419                         MOVWF regaux2
 0180   298E           00420                         GOTO RETOMADV
@@ -529,19 +522,19 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 0183   1C03           00423                         BTFSS STATUS,C  ;¿STATUS.C==1?  -> 0xFF<W
 0184   298A           00424                         GOTO CASO9AD            ;NO, ES MAYOR EL NUMERO
 0185   2986           00425                         GOTO CASO8BD            ;SI, ES MENOR EL NUMERO
-MPASM  5.51                     PROYECTO3.ASM   5-7-2023  21:03:51         PAGE 10
+0186   21D8           00426 CASO8BD:        CALL V8                 
+0187   3029           00427                         MOVLW 0x29
+0188   00A8           00428                         MOVWF regaux2
+0189   298E           00429                         GOTO RETOMADV
+018A   21DD           00430 CASO9AD:        CALL V9
+018B   302E           00431                         MOVLW 0x2E
+018C   00A8           00432                         MOVWF regaux2           
+MPASM 03.80 Released                            PROYECTO3.ASM   5-8-2023  0:30:28         PAGE 10
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
-0186   21D0           00426 CASO8BD:        CALL V8                 
-0187   3029           00427                         MOVLW 0x29
-0188   00A8           00428                         MOVWF regaux2
-0189   298E           00429                         GOTO RETOMADV
-018A   21D4           00430 CASO9AD:        CALL V9
-018B   302E           00431                         MOVLW 0x2E
-018C   00A8           00432                         MOVWF regaux2           
 018D   298E           00433                         GOTO RETOMADV
 018E   0008           00434 RETOMADV:       RETURN
                       00435 ;EVALUAMOS LAS CENTESIMAS, SE RESTA LAS DECENAS
@@ -563,7 +556,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 019B   299F           00449                         GOTO CASO2AC                    ;NO, ES MAYOR EL NUMERO
 019C   299D           00450                         GOTO CASO1BC                    ;SI, ES MENOR EL NUMERO
                       00451                         
-019D   21B8           00452 CASO1BC:        CALL V2                 ;Se imprime 2, la resolución minima para las centésimas es de 0.
+019D   21BA           00452 CASO1BC:        CALL V2                 ;Se imprime 2, la resolución minima para las centésimas es de 0.
                             02
 019E   29AF           00453                         GOTO RETOMACV
                       00454 
@@ -572,334 +565,370 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 01A1   1C03           00457                         BTFSS STATUS,C  ;¿STATUS.C==1?  -> 0x03<W
 01A2   29A6           00458                         GOTO CASO3AC            ;NO, ES MAYOR EL NUMERO
 01A3   29A4           00459                         GOTO CASO2BC            ;SI, ES MENOR EL NUMERO
-01A4   21C0           00460 CASO2BC:        CALL V4         
+01A4   21C4           00460 CASO2BC:        CALL V4         
 01A5   29AF           00461                         GOTO RETOMACV
 01A6   0827           00462 CASO3AC:        MOVF regaux,W
 01A7   3C04           00463                         SUBLW 0x04              ;0x04-W  1 niveles (0.06)
 01A8   1C03           00464                         BTFSS STATUS,C  ;¿STATUS.C==1?  -> 0x04<W
 01A9   29AD           00465                         GOTO CASO4AC    ;NO, ES MAYOR EL NUMERO
 01AA   29AB           00466                         GOTO CASO3BC    ;SI, ES MENOR EL NUMERO
-01AB   21C8           00467 CASO3BC:        CALL V6                 ;3.00-3.99V: 1  la condicion de pertenencia (al haberse evaluado
+01AB   21CE           00467 CASO3BC:        CALL V6                 ;3.00-3.99V: 1  la condicion de pertenencia (al haberse evaluado
                              la clase 0) es ser menor de 2
 01AC   29AF           00468                         GOTO RETOMACV
-01AD   21D0           00469 CASO4AC:        CALL V8
+01AD   21D8           00469 CASO4AC:        CALL V8
 01AE   29AF           00470                         GOTO RETOMACV
 01AF   0008           00471 RETOMACV:       RETURN
                       00472 
                       00473 
 01B0   3030           00474 V0:                     MOVLW a'0'              ;Imprime el valor 0 en el LCD
-MPASM  5.51                     PROYECTO3.ASM   5-7-2023  21:03:51         PAGE 11
+01B1   2291           00475                         CALL DATOS
+01B2   3000           00476                         MOVLW h'0'
+01B3   00B0           00477                         MOVWF resNivel  ;Almacenamos el nivel entero para evaluar en carga de pila o vol
+                            taje
+01B4   0008           00478                         RETURN
+01B5   3031           00479 V1:                     MOVLW a'1'              ;Imprime el valor 1 en el LCD
+01B6   2291           00480                         CALL DATOS
+MPASM 03.80 Released                            PROYECTO3.ASM   5-8-2023  0:30:28         PAGE 11
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
-01B1   2270           00475                         CALL DATOS
-01B2   00B0           00476                         MOVWF resNivel  ;Almacenamos el nivel entero para evaluar en carga de pila o vol
+01B7   3001           00481                         MOVLW h'1'
+01B8   00B0           00482                         MOVWF resNivel  ;Almacenamos el nivel entero para evaluar en carga de pila o vol
                             taje
-01B3   0008           00477                         RETURN
-01B4   3031           00478 V1:                     MOVLW a'1'              ;Imprime el valor 1 en el LCD
-01B5   2270           00479                         CALL DATOS
-01B6   00B0           00480                         MOVWF resNivel  ;Almacenamos el nivel entero para evaluar en carga de pila o vol
+01B9   0008           00483                         RETURN
+01BA   3032           00484 V2:                     MOVLW a'2'              ;Imprime el valor 2 en el LCD
+01BB   2291           00485                         CALL DATOS
+01BC   3002           00486                         MOVLW h'2'
+01BD   00B0           00487                         MOVWF resNivel  ;Almacenamos el nivel entero para evaluar en carga de pila o vol
                             taje
-01B7   0008           00481                         RETURN
-01B8   3032           00482 V2:                     MOVLW a'2'              ;Imprime el valor 2 en el LCD
-01B9   2270           00483                         CALL DATOS
-01BA   00B0           00484                         MOVWF resNivel  ;Almacenamos el nivel entero para evaluar en carga de pila o vol
-                            taje
-01BB   0008           00485                         RETURN
-01BC   3033           00486 V3:                     MOVLW a'3'              ;Imprime el valor 3 en el LCD
-01BD   2270           00487                         CALL DATOS
-01BE   00B0           00488                         MOVWF resNivel  ;Almacenamos el nivel entero para evaluar en carga de pila o vol
-                            taje
-01BF   0008           00489                         RETURN
-01C0   3034           00490 V4:                     MOVLW a'4'              ;Imprime el valor 4 en el LCD
-01C1   2270           00491                         CALL DATOS
+01BE   0008           00488                         RETURN
+01BF   3033           00489 V3:                     MOVLW a'3'              ;Imprime el valor 3 en el LCD
+01C0   2291           00490                         CALL DATOS
+01C1   3003           00491                         MOVLW h'3'
 01C2   00B0           00492                         MOVWF resNivel  ;Almacenamos el nivel entero para evaluar en carga de pila o vol
                             taje
 01C3   0008           00493                         RETURN
-01C4   3035           00494 V5:                     MOVLW a'5'              ;Imprime el valor 5 en el LCD
-01C5   2270           00495                         CALL DATOS
-01C6   00B0           00496                         MOVWF resNivel  ;Almacenamos el nivel entero para evaluar en carga de pila o vol
+01C4   3034           00494 V4:                     MOVLW a'4'              ;Imprime el valor 4 en el LCD
+01C5   2291           00495                         CALL DATOS
+01C6   3004           00496                         MOVLW h'4'
+01C7   00B0           00497                         MOVWF resNivel  ;Almacenamos el nivel entero para evaluar en carga de pila o vol
                             taje
-01C7   0008           00497                         RETURN
-01C8   3036           00498 V6:                     MOVLW a'6'              ;Imprime el valor 6 en el LCD
-01C9   2270           00499                         CALL DATOS
-01CA   00B0           00500                         MOVWF resNivel  ;Almacenamos el nivel entero para evaluar en carga de pila o vol
+01C8   0008           00498                         RETURN
+01C9   3035           00499 V5:                     MOVLW a'5'              ;Imprime el valor 5 en el LCD
+01CA   2291           00500                         CALL DATOS
+01CB   3005           00501                         MOVLW h'5'
+01CC   00B0           00502                         MOVWF resNivel  ;Almacenamos el nivel entero para evaluar en carga de pila o vol
                             taje
-01CB   0008           00501                         RETURN
-01CC   3037           00502 V7:                     MOVLW a'7'              ;Imprime el valor 7 en el LCD
-01CD   2270           00503                         CALL DATOS
-01CE   00B0           00504                         MOVWF resNivel  ;Almacenamos el nivel entero para evaluar en carga de pila o vol
+01CD   0008           00503                         RETURN
+01CE   3036           00504 V6:                     MOVLW a'6'              ;Imprime el valor 6 en el LCD
+01CF   2291           00505                         CALL DATOS
+01D0   3006           00506                         MOVLW h'6'
+01D1   00B0           00507                         MOVWF resNivel  ;Almacenamos el nivel entero para evaluar en carga de pila o vol
                             taje
-01CF   0008           00505                         RETURN
-01D0   3038           00506 V8:                     MOVLW a'8'              ;Imprime el valor 8 en el LCD
-01D1   2270           00507                         CALL DATOS
-01D2   00B0           00508                         MOVWF resNivel  ;Almacenamos el nivel entero para evaluar en carga de pila o vol
-                            taje
-01D3   0008           00509                         RETURN
-01D4   3039           00510 V9:                     MOVLW a'9'              ;Imprime el valor 9 en el LCD
-01D5   2270           00511                         CALL DATOS
+01D2   0008           00508                         RETURN
+01D3   3037           00509 V7:                     MOVLW a'7'              ;Imprime el valor 7 en el LCD
+01D4   2291           00510                         CALL DATOS
+01D5   3007           00511                         MOVLW h'7'
 01D6   00B0           00512                         MOVWF resNivel  ;Almacenamos el nivel entero para evaluar en carga de pila o vol
                             taje
 01D7   0008           00513                         RETURN
-01D8   3040           00514 CARGA:  MOVLW 0X40 ;ALMACENAR CARACTERES EN CGRAM
-01D9   2269           00515                 CALL COMANDO
-01DA   2282           00516                 CALL RET100MS
-                      00517                 
-MPASM  5.51                     PROYECTO3.ASM   5-7-2023  21:03:51         PAGE 12
+01D8   3038           00514 V8:                     MOVLW a'8'              ;Imprime el valor 8 en el LCD
+01D9   2291           00515                         CALL DATOS
+01DA   3008           00516                         MOVLW h'8'
+01DB   00B0           00517                         MOVWF resNivel  ;Almacenamos el nivel entero para evaluar en carga de pila o vol
+                            taje
+01DC   0008           00518                         RETURN
+01DD   3039           00519 V9:                     MOVLW a'9'              ;Imprime el valor 9 en el LCD
+01DE   2291           00520                         CALL DATOS
+01DF   3009           00521                         MOVLW h'9'
+01E0   00B0           00522                         MOVWF resNivel  ;Almacenamos el nivel entero para evaluar en carga de pila o vol
+                            taje
+01E1   0008           00523                         RETURN
+                      00524 
+MPASM 03.80 Released                            PROYECTO3.ASM   5-8-2023  0:30:28         PAGE 12
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
-                      00518                 ;IF resNivel  = 0
-                      00519                 ;CUADRO 0 - ALMACENANDO - Vacio
-01DB   300E           00520                 MOVLW b'01110'
-01DC   2270           00521                 CALL DATOS
-01DD   300A           00522                 MOVLW b'01010'
-01DE   2270           00523                 CALL DATOS
-01DF   300A           00524                 MOVLW b'01010'
-01E0   2270           00525                 CALL DATOS
-01E1   300A           00526                 MOVLW b'01010'
-01E2   2270           00527                 CALL DATOS
-01E3   3011           00528                 MOVLW b'10001'
-01E4   2270           00529                 CALL DATOS
-01E5   3011           00530                 MOVLW b'10001'
-01E6   2270           00531                 CALL DATOS
-01E7   301F           00532                 MOVLW b'11111'
-01E8   2270           00533                 CALL DATOS
-                      00534 
-                      00535                 ;IF resNivel  = 1
-                      00536                 ;CUADRO 1 - ALMACENANDO - Nivel 1
-01E9   300E           00537                 MOVLW b'01110'
-01EA   2270           00538                 CALL DATOS
-01EB   300A           00539                 MOVLW b'01010'
-01EC   2270           00540                 CALL DATOS
-01ED   300A           00541                 MOVLW b'01010'
-01EE   2270           00542                 CALL DATOS
-01EF   300A           00543                 MOVLW b'01010'
-01F0   2270           00544                 CALL DATOS
-01F1   3011           00545                 MOVLW b'10001'
-01F2   2270           00546                 CALL DATOS
-01F3   301F           00547                 MOVLW b'11111'
-01F4   2270           00548                 CALL DATOS
-01F5   301F           00549                 MOVLW b'11111'
-01F6   2270           00550                 CALL DATOS              
+01E2   2105           00525 CARGA:  CALL UNIVOLT
+01E3   3001           00526                 MOVLW 0x01              ;Limpia Display
+01E4   228A           00527                 CALL COMANDO
+                      00528                 
+                      00529 
+01E5   3040           00530                 MOVLW 0X40 ;ALMACENAR CARACTERES EN CGRAM
+01E6   228A           00531                 CALL COMANDO
+01E7   22A3           00532                 CALL RET100MS
+                      00533                 
+                      00534                 ;CUADRO 0 - ALMACENANDO - Vacio
+01E8   3000           00535                 MOVLW b'00000'
+01E9   2291           00536                 CALL DATOS
+01EA   300E           00537                 MOVLW b'01110'
+01EB   2291           00538                 CALL DATOS
+01EC   300A           00539                 MOVLW b'01010'
+01ED   2291           00540                 CALL DATOS
+01EE   300A           00541                 MOVLW b'01010'
+01EF   2291           00542                 CALL DATOS
+01F0   300A           00543                 MOVLW b'01010'
+01F1   2291           00544                 CALL DATOS
+01F2   3011           00545                 MOVLW b'10001'
+01F3   2291           00546                 CALL DATOS
+01F4   3011           00547                 MOVLW b'10001'
+01F5   2291           00548                 CALL DATOS
+01F6   301F           00549                 MOVLW b'11111'
+01F7   2291           00550                 CALL DATOS
                       00551 
-                      00552                 ;IF resNivel  = 2
-                      00553                 ;CUADRO 2 - ALMACENANDO - Nivel 2
-01F7   300E           00554                 MOVLW b'01110'
-01F8   2270           00555                 CALL DATOS
-01F9   300A           00556                 MOVLW b'01010'
-01FA   2270           00557                 CALL DATOS
-01FB   300A           00558                 MOVLW b'01010'
-01FC   2270           00559                 CALL DATOS
-01FD   300A           00560                 MOVLW b'01010'
-01FE   2270           00561                 CALL DATOS
-01FF   301F           00562                 MOVLW b'11111'
-0200   2270           00563                 CALL DATOS
-0201   301F           00564                 MOVLW b'11111'
-0202   2270           00565                 CALL DATOS
-0203   301F           00566                 MOVLW b'11111'
-0204   2270           00567                 CALL DATOS      
-                      00568 
-                      00569                 ;IF resNivel  = 3
-                      00570                 ;CUADRO 3 - ALMACENANDO - Nivel 3
-MPASM  5.51                     PROYECTO3.ASM   5-7-2023  21:03:51         PAGE 13
+                      00552                 ;CUADRO 1 - ALMACENANDO - Nivel 1
+01F8   3000           00553                 MOVLW b'00000'
+01F9   2291           00554                 CALL DATOS
+01FA   300E           00555                 MOVLW b'01110'
+01FB   2291           00556                 CALL DATOS
+01FC   300A           00557                 MOVLW b'01010'
+01FD   2291           00558                 CALL DATOS
+01FE   300A           00559                 MOVLW b'01010'
+01FF   2291           00560                 CALL DATOS
+0200   300A           00561                 MOVLW b'01010'
+0201   2291           00562                 CALL DATOS
+0202   3011           00563                 MOVLW b'10001'
+0203   2291           00564                 CALL DATOS
+0204   301F           00565                 MOVLW b'11111'
+0205   2291           00566                 CALL DATOS
+0206   301F           00567                 MOVLW b'11111'
+0207   2291           00568                 CALL DATOS              
+                      00569 
+                      00570                 ;CUADRO 2 - ALMACENANDO - Nivel 2
+0208   3000           00571                 MOVLW b'00000'
+0209   2291           00572                 CALL DATOS
+020A   300E           00573                 MOVLW b'01110'
+020B   2291           00574                 CALL DATOS
+020C   300A           00575                 MOVLW b'01010'
+020D   2291           00576                 CALL DATOS
+020E   300A           00577                 MOVLW b'01010'
+MPASM 03.80 Released                            PROYECTO3.ASM   5-8-2023  0:30:28         PAGE 13
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
-0205   300E           00571                 MOVLW b'01110'
-0206   2270           00572                 CALL DATOS
-0207   300A           00573                 MOVLW b'01010'
-0208   2270           00574                 CALL DATOS
-0209   300A           00575                 MOVLW b'01010'
-020A   2270           00576                 CALL DATOS
-020B   300E           00577                 MOVLW b'01110'
-020C   2270           00578                 CALL DATOS
-020D   301F           00579                 MOVLW b'11111'
-020E   2270           00580                 CALL DATOS
-020F   301F           00581                 MOVLW b'11111'
-0210   2270           00582                 CALL DATOS
-0211   301F           00583                 MOVLW b'11111'
-0212   2270           00584                 CALL DATOS      
-                      00585 
-                      00586                 ;IF resNivel  = 4
-                      00587                 ;CUADRO 4 - ALMACENANDO - Nivel 4
-0213   300E           00588                 MOVLW b'01110'
-0214   2270           00589                 CALL DATOS
-0215   300A           00590                 MOVLW b'01010'
-0216   2270           00591                 CALL DATOS
-0217   300E           00592                 MOVLW b'01110'
-0218   2270           00593                 CALL DATOS
-0219   300E           00594                 MOVLW b'01110'
-021A   2270           00595                 CALL DATOS
-021B   301F           00596                 MOVLW b'11111'
-021C   2270           00597                 CALL DATOS
-021D   301F           00598                 MOVLW b'11111'
-021E   2270           00599                 CALL DATOS
-021F   301F           00600                 MOVLW b'11111'
-0220   2270           00601                 CALL DATOS      
-                      00602 
-                      00603                 ;IF resNivel  = 5
-                      00604                 ;CUADRO 5 - ALMACENANDO - Nivel 5
-0221   300E           00605                 MOVLW b'01110'
-0222   2270           00606                 CALL DATOS
-0223   300E           00607                 MOVLW b'01110'
-0224   2270           00608                 CALL DATOS
-0225   300E           00609                 MOVLW b'01110'
-0226   2270           00610                 CALL DATOS
-0227   300E           00611                 MOVLW b'01110'
-0228   2270           00612                 CALL DATOS
-0229   301F           00613                 MOVLW b'11111'
-022A   2270           00614                 CALL DATOS
-022B   301F           00615                 MOVLW b'11111'
-022C   2270           00616                 CALL DATOS
-022D   301F           00617                 MOVLW b'11111'
-022E   2270           00618                 CALL DATOS              
-                      00619                 
-                      00620                 ;COLOCA EN PRIMERA LINEA DEL DISPLAY
-022F   3080           00621                 MOVLW 0X80
-0230   2269           00622                 CALL COMANDO
-0231   2282           00623                 CALL RET100MS
-MPASM  5.51                     PROYECTO3.ASM   5-7-2023  21:03:51         PAGE 14
+020F   2291           00578                 CALL DATOS
+0210   300A           00579                 MOVLW b'01010'
+0211   2291           00580                 CALL DATOS
+0212   301F           00581                 MOVLW b'11111'
+0213   2291           00582                 CALL DATOS
+0214   301F           00583                 MOVLW b'11111'
+0215   2291           00584                 CALL DATOS
+0216   301F           00585                 MOVLW b'11111'
+0217   2291           00586                 CALL DATOS      
+                      00587 
+                      00588                 ;CUADRO 3 - ALMACENANDO - Nivel 3
+0218   3000           00589                 MOVLW b'00000'
+0219   2291           00590                 CALL DATOS
+021A   300E           00591                 MOVLW b'01110'
+021B   2291           00592                 CALL DATOS
+021C   300A           00593                 MOVLW b'01010'
+021D   2291           00594                 CALL DATOS
+021E   300A           00595                 MOVLW b'01010'
+021F   2291           00596                 CALL DATOS
+0220   300E           00597                 MOVLW b'01110'
+0221   2291           00598                 CALL DATOS
+0222   301F           00599                 MOVLW b'11111'
+0223   2291           00600                 CALL DATOS
+0224   301F           00601                 MOVLW b'11111'
+0225   2291           00602                 CALL DATOS
+0226   301F           00603                 MOVLW b'11111'
+0227   2291           00604                 CALL DATOS      
+                      00605 
+                      00606                 ;CUADRO 4 - ALMACENANDO - Nivel 4
+0228   3000           00607                 MOVLW b'00000'
+0229   2291           00608                 CALL DATOS
+022A   300E           00609                 MOVLW b'01110'
+022B   2291           00610                 CALL DATOS
+022C   300A           00611                 MOVLW b'01010'
+022D   2291           00612                 CALL DATOS
+022E   300E           00613                 MOVLW b'01110'
+022F   2291           00614                 CALL DATOS
+0230   300E           00615                 MOVLW b'01110'
+0231   2291           00616                 CALL DATOS
+0232   301F           00617                 MOVLW b'11111'
+0233   2291           00618                 CALL DATOS
+0234   301F           00619                 MOVLW b'11111'
+0235   2291           00620                 CALL DATOS
+0236   301F           00621                 MOVLW b'11111'
+0237   2291           00622                 CALL DATOS      
+                      00623 
+                      00624                 ;CUADRO 5 - ALMACENANDO - Nivel 5
+0238   3000           00625                 MOVLW b'00000'
+0239   2291           00626                 CALL DATOS
+023A   300E           00627                 MOVLW b'01110'
+023B   2291           00628                 CALL DATOS
+023C   300E           00629                 MOVLW b'01110'
+023D   2291           00630                 CALL DATOS
+MPASM 03.80 Released                            PROYECTO3.ASM   5-8-2023  0:30:28         PAGE 14
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
-                      00624 
-0232   2105           00625                 CALL UNIVOLT            ;Caso para ver la "carga de pila"
-0233   0830           00626                 MOVF resNivel,w
-0234   0782           00627                 ADDWF PCL,F             ;(PCL)<-- (PCL)+W
-0235   2A3B           00628                 GOTO BATERIA0           ;PC+0   Caso 000: Numero 0
-0236   2A3E           00629                 GOTO BATERIA1           ;PC+1   Caso 001: Numero 1
-0237   2A41           00630                 GOTO BATERIA2           ;PC+2   Caso 010: Numero 2
-0238   2A44           00631                 GOTO BATERIA3           ;PC+3   Caso 011: Numero 3
-0239   2A47           00632                 GOTO BATERIA4           ;PC+4   Caso 100: Numero 4
-023A   2A4A           00633                 GOTO BATERIA5           ;PC+5   Caso 101: Numero 5
-                      00634 
-023B   3000           00635 BATERIA0: MOVLW 0X00 ;Cuadro 0 - Vacio
-023C   2270           00636                   CALL DATOS
-023D   2A4D           00637                   GOTO HOLD_CAR
-                      00638 
-023E   3001           00639 BATERIA1: MOVLW 0X01 ;Cuadro 1 - Nivel 1
-023F   2270           00640                   CALL DATOS
-0240   2A4D           00641                   GOTO HOLD_CAR
-                      00642 
-0241   3002           00643 BATERIA2: MOVLW 0X02 ;Cuadro 2 - Nivel 2
-0242   2270           00644                   CALL DATOS
-0243   2A4D           00645                   GOTO HOLD_CAR
+023E   300E           00631                 MOVLW b'01110'
+023F   2291           00632                 CALL DATOS
+0240   300E           00633                 MOVLW b'01110'
+0241   2291           00634                 CALL DATOS
+0242   301F           00635                 MOVLW b'11111'
+0243   2291           00636                 CALL DATOS
+0244   301F           00637                 MOVLW b'11111'
+0245   2291           00638                 CALL DATOS
+0246   301F           00639                 MOVLW b'11111'
+0247   2291           00640                 CALL DATOS              
+                      00641                 
+                      00642                 ;COLOCA EN PRIMERA LINEA DEL DISPLAY
+0248   3080           00643                 MOVLW 0X80
+0249   228A           00644                 CALL COMANDO
+024A   22A3           00645                 CALL RET100MS
                       00646 
-0244   3003           00647 BATERIA3: MOVLW 0X03 ;Cuadro 3 - Nivel 3
-0245   2270           00648                   CALL DATOS
-0246   2A4D           00649                   GOTO HOLD_CAR
-                      00650 
-0247   3004           00651 BATERIA4: MOVLW 0X04 ;Cuadro 4 - Nivel 4
-0248   2270           00652                   CALL DATOS
-0249   2A4D           00653                   GOTO HOLD_CAR
-                      00654 
-024A   3005           00655 BATERIA5: MOVLW 0X05 ;Cuadro 5 - Nivel 5
-024B   2270           00656                   CALL DATOS
-024C   2A4D           00657                   GOTO HOLD_CAR
-                      00658 
-024D   0809           00659 HOLD_CAR:       MOVF PORTE,W
-024E   3C04           00660                         SUBLW 0x04 ;  W<--W-0x40
-024F   1903           00661                         BTFSC STATUS,Z  ;¿(CONTA)=0X40?
-0250   2A4D           00662                         GOTO HOLD_CAR ;SI                       
-0251   3001           00663                         MOVLW 0x01              ;Limpia Display
-0252   2269           00664                         CALL COMANDO
-0253   3080           00665                         MOVLW 0x80              ;regresa a inicio linea 1
-0254   2269           00666                         CALL COMANDO
-0255   0180           00667                         CLRF W
-0256   281F           00668                         GOTO LOOP_P     
+                      00647 
+024B   3001           00648                 MOVLW h'1'
+Message[305]: Using default destination of 1 (file).
+024C   02B0           00649                 SUBWF resNivel  ;resNivel-1     
+024D   1903           00650                 BTFSC STATUS,Z  ;== 0?
+024E   2A5F           00651                 GOTO BATERIA1   ;SI
+Message[305]: Using default destination of 1 (file).
+024F   02B0           00652                 SUBWF resNivel  ;Else, resNivel-1       
+0250   1903           00653                 BTFSC STATUS,Z  ;== 0?
+0251   2A62           00654                 GOTO BATERIA2   ;SI
+Message[305]: Using default destination of 1 (file).
+0252   02B0           00655                 SUBWF resNivel  ;Else, resNivel-1       
+0253   1903           00656                 BTFSC STATUS,Z  ;== 0?
+0254   2A65           00657                 GOTO BATERIA3   ;SI
+Message[305]: Using default destination of 1 (file).
+0255   02B0           00658                 SUBWF resNivel  ;Else, resNivel-1       
+0256   1903           00659                 BTFSC STATUS,Z  ;== 0?
+0257   2A68           00660                 GOTO BATERIA4   ;SI
+Message[305]: Using default destination of 1 (file).
+0258   02B0           00661                 SUBWF resNivel  ;Else, resNivel-1       
+0259   1903           00662                 BTFSC STATUS,Z  ;== 0?
+025A   2A6B           00663                 GOTO BATERIA5   ;SI             
+025B   2A5C           00664                 GOTO BATERIA0   ;.-. Sepa a donde fue
+                      00665 
+025C   3000           00666 BATERIA0:MOVLW 0x00 ;Cuadro 0 - Vacio
+025D   2291           00667                   CALL DATOS
+025E   2A6E           00668                   GOTO HOLD_CAR
                       00669 
-                      00670                         
-0257   281F           00671 DEFAULT:        GOTO LOOP_P             ;Caso por defecto, no hace nada, retorna al loop para evaluar lo
+025F   3001           00670 BATERIA1: MOVLW 0X01 ;Cuadro 1 - Nivel 1
+0260   2291           00671                   CALL DATOS
+0261   2A6E           00672                   GOTO HOLD_CAR
+                      00673 
+0262   3002           00674 BATERIA2: MOVLW 0X02 ;Cuadro 2 - Nivel 2
+0263   2291           00675                   CALL DATOS
+0264   2A6E           00676                   GOTO HOLD_CAR
+                      00677 
+0265   3003           00678 BATERIA3: MOVLW 0X03 ;Cuadro 3 - Nivel 3
+MPASM 03.80 Released                            PROYECTO3.ASM   5-8-2023  0:30:28         PAGE 15
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0266   2291           00679                   CALL DATOS
+0267   2A6E           00680                   GOTO HOLD_CAR
+                      00681 
+0268   3004           00682 BATERIA4: MOVLW 0X04 ;Cuadro 4 - Nivel 4
+0269   2291           00683                   CALL DATOS
+026A   2A6E           00684                   GOTO HOLD_CAR
+                      00685 
+026B   3005           00686 BATERIA5: MOVLW 0X05 ;Cuadro 5 - Nivel 5
+026C   2291           00687                   CALL DATOS
+026D   2A6E           00688                   GOTO HOLD_CAR
+                      00689 
+026E   0809           00690 HOLD_CAR:       MOVF PORTE,W
+026F   3C04           00691                         SUBLW 0x04 ;  W<--W-0x40
+0270   1903           00692                         BTFSC STATUS,Z  ;¿(CONTA)=0X40?
+0271   2A6E           00693                         GOTO HOLD_CAR ;SI                       
+0272   3001           00694                         MOVLW 0x01              ;Limpia Display
+0273   228A           00695                         CALL COMANDO
+0274   3080           00696                         MOVLW 0x80              ;regresa a inicio linea 1
+0275   228A           00697                         CALL COMANDO
+0276   0180           00698                         CLRF W
+0277   281F           00699                         GOTO LOOP_P     
+                      00700 
+                      00701                         
+0278   281F           00702 DEFAULT:        GOTO LOOP_P             ;Caso por defecto, no hace nada, retorna al loop para evaluar lo
                             s bits de control
-                      00672 
-0258   3030           00673 INICIA_LCD:     MOVLW 0x30
-0259   2269           00674                         CALL COMANDO
-025A   2282           00675                         CALL RET100MS
-MPASM  5.51                     PROYECTO3.ASM   5-7-2023  21:03:51         PAGE 15
+                      00703 
+0279   3030           00704 INICIA_LCD:     MOVLW 0x30
+027A   228A           00705                         CALL COMANDO
+027B   22A3           00706                         CALL RET100MS
+027C   3030           00707                         MOVLW 0x30
+027D   228A           00708                         CALL COMANDO
+027E   22A3           00709                         CALL RET100MS
+027F   3038           00710                         MOVLW 0x38
+0280   228A           00711                         CALL COMANDO
+0281   300C           00712                         MOVLW 0x0C
+0282   228A           00713                         CALL COMANDO
+0283   3001           00714                         MOVLW 0x01
+0284   228A           00715                         CALL COMANDO
+0285   3006           00716                         MOVLW 0x06
+0286   228A           00717                         CALL COMANDO
+0287   3002           00718                         MOVLW 0x02
+0288   228A           00719                         CALL COMANDO
+0289   0008           00720                         RETURN
+028A   0086           00721 COMANDO:        MOVWF PORTB
+028B   229A           00722                         CALL RET200
+028C   1085           00723                         BCF PORTA,1
+028D   1505           00724                         BSF     PORTA,2
+028E   229A           00725                         CALL RET200
+028F   1105           00726                         BCF PORTA,2
+0290   0008           00727                         RETURN
+0291   0086           00728 DATOS:          MOVWF PORTB
+0292   229A           00729                         CALL RET200
+0293   1485           00730                         BSF PORTA,1
+MPASM 03.80 Released                            PROYECTO3.ASM   5-8-2023  0:30:28         PAGE 16
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
-025B   3030           00676                         MOVLW 0x30
-025C   2269           00677                         CALL COMANDO
-025D   2282           00678                         CALL RET100MS
-025E   3038           00679                         MOVLW 0x38
-025F   2269           00680                         CALL COMANDO
-0260   300C           00681                         MOVLW 0x0C
-0261   2269           00682                         CALL COMANDO
-0262   3001           00683                         MOVLW 0x01
-0263   2269           00684                         CALL COMANDO
-0264   3006           00685                         MOVLW 0x06
-0265   2269           00686                         CALL COMANDO
-0266   3002           00687                         MOVLW 0x02
-0267   2269           00688                         CALL COMANDO
-0268   0008           00689                         RETURN
-0269   0086           00690 COMANDO:        MOVWF PORTB
-026A   2279           00691                         CALL RET200
-026B   1085           00692                         BCF PORTA,1
-026C   1505           00693                         BSF     PORTA,2
-026D   2279           00694                         CALL RET200
-026E   1105           00695                         BCF PORTA,2
-026F   0008           00696                         RETURN
-0270   0086           00697 DATOS:          MOVWF PORTB
-0271   2279           00698                         CALL RET200
-0272   1485           00699                         BSF PORTA,1
-0273   1505           00700                         BSF     PORTA,2
-0274   2279           00701                         CALL RET200
-0275   1105           00702                         BCF PORTA,2
-0276   2279           00703                         CALL RET200
-0277   2279           00704                         CALL RET200
-0278   0008           00705                         RETURN
-0279   30AA           00706 RET200:         MOVLW 0xAA
-027A   00A1           00707                         MOVWF valor1
-027B   30A4           00708 LOOP:           MOVLW d'164'
-027C   00A0           00709                         MOVWF valor
-027D   0BA0           00710 LOOP1:          DECFSZ valor,1
-027E   2A7D           00711                         GOTO LOOP1
-027F   0BA1           00712                         DECFSZ valor1,1
-0280   2A7B           00713                         GOTO LOOP
-0281   0008           00714                         RETURN
-0282   3003           00715 RET100MS:       MOVLW 0x03
-0283   00A0           00716                         MOVWF valor
-0284   30FF           00717 TRES:           MOVLW 0xFF
-0285   00A1           00718                         MOVWF valor1
-0286   30FF           00719 DOS:            MOVLW 0xFF
-0287   00A2           00720                         MOVWF valor2
+0294   1505           00731                         BSF     PORTA,2
+0295   229A           00732                         CALL RET200
+0296   1105           00733                         BCF PORTA,2
+0297   229A           00734                         CALL RET200
+0298   229A           00735                         CALL RET200
+0299   0008           00736                         RETURN
+029A   30AA           00737 RET200:         MOVLW 0xAA
+029B   00A1           00738                         MOVWF valor1
+029C   30A4           00739 LOOP:           MOVLW d'164'
+029D   00A0           00740                         MOVWF valor
+029E   0BA0           00741 LOOP1:          DECFSZ valor,1
+029F   2A9E           00742                         GOTO LOOP1
+02A0   0BA1           00743                         DECFSZ valor1,1
+02A1   2A9C           00744                         GOTO LOOP
+02A2   0008           00745                         RETURN
+02A3   3003           00746 RET100MS:       MOVLW 0x03
+02A4   00A0           00747                         MOVWF valor
+02A5   30FF           00748 TRES:           MOVLW 0xFF
+02A6   00A1           00749                         MOVWF valor1
+02A7   30FF           00750 DOS:            MOVLW 0xFF
+02A8   00A2           00751                         MOVWF valor2
 Message[305]: Using default destination of 1 (file).
-0288   0BA2           00721 UNO:            DECFSZ valor2
-0289   2A88           00722                         GOTO UNO
+02A9   0BA2           00752 UNO:            DECFSZ valor2
+02AA   2AA9           00753                         GOTO UNO
 Message[305]: Using default destination of 1 (file).
-028A   0BA1           00723                         DECFSZ valor1
-028B   2A86           00724                         GOTO DOS
+02AB   0BA1           00754                         DECFSZ valor1
+02AC   2AA7           00755                         GOTO DOS
 Message[305]: Using default destination of 1 (file).
-028C   0BA0           00725                         DECFSZ valor
-MPASM  5.51                     PROYECTO3.ASM   5-7-2023  21:03:51         PAGE 16
-
-
-LOC  OBJECT CODE     LINE SOURCE TEXT
-  VALUE
-
-028D   2A84           00726                         GOTO TRES
-028E   0008           00727                         RETURN
-                      00728 
-028F   3053           00729 RETARDO:        MOVLW cte1              ;SUBRUTINA DE RETARDO DE 50us   --valido
-0290   00A1           00730                         MOVWF valor1
+02AD   0BA0           00756                         DECFSZ valor
+02AE   2AA5           00757                         GOTO TRES
+02AF   0008           00758                         RETURN
+                      00759 
+02B0   3053           00760 RETARDO:        MOVLW cte1              ;SUBRUTINA DE RETARDO DE 50us   --valido
+02B1   00A1           00761                         MOVWF valor1
 Message[305]: Using default destination of 1 (file).
-0291   0BA1           00731 LOOPR:          DECFSZ valor1
-0292   2A91           00732                         GOTO LOOPR
-0293   0008           00733                         RETURN
-                      00734                 END
-MPASM  5.51                     PROYECTO3.ASM   5-7-2023  21:03:51         PAGE 17
+02B2   0BA1           00762 LOOPR:          DECFSZ valor1
+02B3   2AB2           00763                         GOTO LOOPR
+02B4   0008           00764                         RETURN
+                      00765                 END
+MPASM 03.80 Released                            PROYECTO3.ASM   5-8-2023  0:30:28         PAGE 17
 
 
 SYMBOL TABLE
@@ -919,19 +948,19 @@ ADIF                              00000006
 ADON                              00000000
 ADRESH                            0000001E
 ADRESL                            0000009E
-BATERIA0                          0000023B
-BATERIA1                          0000023E
-BATERIA2                          00000241
-BATERIA3                          00000244
-BATERIA4                          00000247
-BATERIA5                          0000024A
+BATERIA0                          0000025C
+BATERIA1                          0000025F
+BATERIA2                          00000262
+BATERIA3                          00000265
+BATERIA4                          00000268
+BATERIA5                          0000026B
 BCLIE                             00000003
 BCLIF                             00000003
 BF                                00000000
 BINARIO                           000000B7
 BRGH                              00000002
 C                                 00000000
-CARGA                             000001D8
+CARGA                             000001E2
 CASO0                             00000094
 CASO0B                            0000010A
 CASO0BC                           00000196
@@ -958,7 +987,7 @@ CASO3B                            00000125
 CASO3BC                           000001AB
 CASO3BD                           00000159
 CASO4                             0000009C
-MPASM  5.51                     PROYECTO3.ASM   5-7-2023  21:03:51         PAGE 18
+MPASM 03.80 Released                            PROYECTO3.ASM   5-8-2023  0:30:28         PAGE 18
 
 
 SYMBOL TABLE
@@ -1008,25 +1037,23 @@ CCP2M2                            00000002
 CCP2M3                            00000003
 CCP2X                             00000005
 CCP2Y                             00000004
-CCPR1                             00000015
 CCPR1H                            00000016
 CCPR1L                            00000015
-CCPR2                             0000001B
 CCPR2H                            0000001C
 CCPR2L                            0000001B
 CENVOLT                           0000018F
 CHS0                              00000003
 CHS1                              00000004
-MPASM  5.51                     PROYECTO3.ASM   5-7-2023  21:03:51         PAGE 19
+CHS2                              00000005
+CKE                               00000006
+MPASM 03.80 Released                            PROYECTO3.ASM   5-8-2023  0:30:28         PAGE 19
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
-CHS2                              00000005
-CKE                               00000006
 CKP                               00000004
-COMANDO                           00000269
+COMANDO                           0000028A
 CONTINUA                          00000023
 CONVEND                           000000B4
 CONVERHEXA                        00000082
@@ -1035,14 +1062,13 @@ CSRC                              00000007
 CentesimaEncontrada               00000061
 D                                 00000005
 DATA_ADDRESS                      00000005
-DATOS                             00000270
+DATOS                             00000291
 DC                                00000001
 DECIMAL                           00000037
 DECVOLT                           00000137
-DEFAULT                           00000257
-DOS                               00000286
+DEFAULT                           00000278
+DOS                               000002A7
 D_A                               00000005
-D_NOT_A                           00000005
 DecimaEncontrada                  00000063
 EEADR                             0000010D
 EEADRH                            0000010F
@@ -1063,10 +1089,9 @@ GCEN                              00000007
 GIE                               00000007
 GO                                00000002
 GO_DONE                           00000002
-GO_NOT_DONE                       00000002
 HEXADECIMAL                       00000065
 HOLD_BIN                          000000DC
-HOLD_CAR                          0000024D
+HOLD_CAR                          0000026E
 HOLD_DECIMAL                      00000057
 HOLD_HEX                          00000078
 HOLD_VOL                          000000FB
@@ -1076,23 +1101,23 @@ I2C_START                         00000003
 I2C_STOP                          00000004
 IBF                               00000007
 IBOV                              00000005
-MPASM  5.51                     PROYECTO3.ASM   5-7-2023  21:03:51         PAGE 20
+INDF                              00000000
+INICIA_LCD                        00000279
+INICIO                            00000005
+INTCON                            0000000B
+MPASM 03.80 Released                            PROYECTO3.ASM   5-8-2023  0:30:28         PAGE 20
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
-INDF                              00000000
-INICIA_LCD                        00000258
-INICIO                            00000005
-INTCON                            0000000B
 INTE                              00000004
 INTEDG                            00000006
 INTF                              00000001
 IRP                               00000007
-LOOP                              0000027B
-LOOP1                             0000027D
-LOOPR                             00000291
+LOOP                              0000029C
+LOOP1                             0000029E
+LOOPR                             000002B2
 LOOP_Centesimas                   00000040
 LOOP_Decimas                      00000046
 LOOP_P                            0000001F
@@ -1135,44 +1160,22 @@ PORTD                             00000008
 PORTE                             00000009
 PR2                               00000092
 PRUEBA                            00000030
-MPASM  5.51                     PROYECTO3.ASM   5-7-2023  21:03:51         PAGE 21
+PS0                               00000000
+PS1                               00000001
+PS2                               00000002
+PSA                               00000003
+MPASM 03.80 Released                            PROYECTO3.ASM   5-8-2023  0:30:28         PAGE 21
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
-PS0                               00000000
-PS1                               00000001
-PS2                               00000002
-PSA                               00000003
 PSPIE                             00000007
 PSPIF                             00000007
 PSPMODE                           00000004
 R                                 00000002
-RA0                               00000000
-RA1                               00000001
-RA2                               00000002
-RA3                               00000003
-RA4                               00000004
-RA5                               00000005
-RB0                               00000000
-RB1                               00000001
-RB2                               00000002
-RB3                               00000003
-RB4                               00000004
-RB5                               00000005
-RB6                               00000006
-RB7                               00000007
 RBIE                              00000003
 RBIF                              00000000
-RC0                               00000000
-RC1                               00000001
-RC2                               00000002
-RC3                               00000003
-RC4                               00000004
-RC5                               00000005
-RC6                               00000006
-RC7                               00000007
 RC8_9                             00000006
 RC9                               00000006
 RCD8                              00000000
@@ -1182,27 +1185,10 @@ RCIF                              00000005
 RCREG                             0000001A
 RCSTA                             00000018
 RD                                00000000
-RD0                               00000000
-RD1                               00000001
-RD2                               00000002
-RD3                               00000003
-RD4                               00000004
-RD5                               00000005
-RD6                               00000006
-RD7                               00000007
-RE0                               00000000
-RE1                               00000001
-RE2                               00000002
 READ_WRITE                        00000002
-MPASM  5.51                     PROYECTO3.ASM   5-7-2023  21:03:51         PAGE 22
-
-
-SYMBOL TABLE
-  LABEL                             VALUE 
-
-RET100MS                          00000282
-RET200                            00000279
-RETARDO                           0000028F
+RET100MS                          000002A3
+RET200                            0000029A
+RETARDO                           000002B0
 RETOMACV                          000001AF
 RETOMADV                          0000018E
 RETOMAV                           00000136
@@ -1211,7 +1197,6 @@ RP1                               00000006
 RSEN                              00000001
 RX9                               00000006
 RX9D                              00000000
-R_NOT_W                           00000002
 R_W                               00000002
 S                                 00000003
 SEN                               00000000
@@ -1238,6 +1223,12 @@ T0CS                              00000005
 T0IE                              00000005
 T0IF                              00000002
 T0SE                              00000004
+MPASM 03.80 Released                            PROYECTO3.ASM   5-8-2023  0:30:28         PAGE 22
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
 T1CKPS0                           00000004
 T1CKPS1                           00000005
 T1CON                             00000010
@@ -1248,17 +1239,8 @@ T2CKPS0                           00000000
 T2CKPS1                           00000001
 T2CON                             00000012
 TMR0                              00000001
-TMR0IE                            00000005
-TMR0IF                            00000002
-TMR1                              0000000E
 TMR1CS                            00000001
 TMR1H                             0000000F
-MPASM  5.51                     PROYECTO3.ASM   5-7-2023  21:03:51         PAGE 23
-
-
-SYMBOL TABLE
-  LABEL                             VALUE 
-
 TMR1IE                            00000000
 TMR1IF                            00000000
 TMR1L                             0000000E
@@ -1271,53 +1253,17 @@ TOUTPS0                           00000003
 TOUTPS1                           00000004
 TOUTPS2                           00000005
 TOUTPS3                           00000006
-TRES                              00000284
+TRES                              000002A5
 TRISA                             00000085
-TRISA0                            00000000
-TRISA1                            00000001
-TRISA2                            00000002
-TRISA3                            00000003
-TRISA4                            00000004
-TRISA5                            00000005
 TRISB                             00000086
-TRISB0                            00000000
-TRISB1                            00000001
-TRISB2                            00000002
-TRISB3                            00000003
-TRISB4                            00000004
-TRISB5                            00000005
-TRISB6                            00000006
-TRISB7                            00000007
 TRISC                             00000087
-TRISC0                            00000000
-TRISC1                            00000001
-TRISC2                            00000002
-TRISC3                            00000003
-TRISC4                            00000004
-TRISC5                            00000005
-TRISC6                            00000006
-TRISC7                            00000007
 TRISD                             00000088
-TRISD0                            00000000
-TRISD1                            00000001
-TRISD2                            00000002
-TRISD3                            00000003
-TRISD4                            00000004
-TRISD5                            00000005
-TRISD6                            00000006
-TRISD7                            00000007
 TRISE                             00000089
 TRISE0                            00000000
 TRISE1                            00000001
 TRISE2                            00000002
 TRMT                              00000001
 TX8_9                             00000006
-MPASM  5.51                     PROYECTO3.ASM   5-7-2023  21:03:51         PAGE 24
-
-
-SYMBOL TABLE
-  LABEL                             VALUE 
-
 TX9                               00000006
 TX9D                              00000000
 TXD8                              00000000
@@ -1328,17 +1274,23 @@ TXREG                             00000019
 TXSTA                             00000098
 UA                                00000001
 UNIVOLT                           00000105
-UNO                               00000288
+UNO                               000002A9
 V0                                000001B0
-V1                                000001B4
-V2                                000001B8
-V3                                000001BC
-V4                                000001C0
-V5                                000001C4
-V6                                000001C8
-V7                                000001CC
-V8                                000001D0
-V9                                000001D4
+V1                                000001B5
+V2                                000001BA
+V3                                000001BF
+V4                                000001C4
+V5                                000001C9
+V6                                000001CE
+MPASM 03.80 Released                            PROYECTO3.ASM   5-8-2023  0:30:28         PAGE 23
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+V7                                000001D3
+V8                                000001D8
+V9                                000001DD
 VOLTAJE                           000000EC
 W                                 00000000
 WCOL                              00000007
@@ -1348,9 +1300,6 @@ WRERR                             00000003
 Z                                 00000002
 _BODEN_OFF                        00003FBF
 _BODEN_ON                         00003FFF
-_BOREN_OFF                        00003FBF
-_BOREN_ON                         00003FFF
-_CONFIG                           00002007
 _CPD_OFF                          00003FFF
 _CPD_ON                           00003EFF
 _CP_ALL                           00000FCF
@@ -1359,38 +1308,19 @@ _CP_OFF                           00003FFF
 _CP_UPPER_256                     00002FEF
 _DEBUG_OFF                        00003FFF
 _DEBUG_ON                         000037FF
-_DEVID1                           00002006
-_FOSC_EXTRC                       00003FFF
-_FOSC_HS                          00003FFE
-_FOSC_LP                          00003FFC
-_FOSC_XT                          00003FFD
 _HS_OSC                           00003FFE
-_IDLOC0                           00002000
-_IDLOC1                           00002001
-_IDLOC2                           00002002
-_IDLOC3                           00002003
 _LP_OSC                           00003FFC
 _LVP_OFF                          00003F7F
-MPASM  5.51                     PROYECTO3.ASM   5-7-2023  21:03:51         PAGE 25
-
-
-SYMBOL TABLE
-  LABEL                             VALUE 
-
 _LVP_ON                           00003FFF
 _PWRTE_OFF                        00003FFF
 _PWRTE_ON                         00003FF7
 _RC_OSC                           00003FFF
-_WDTE_OFF                         00003FFB
-_WDTE_ON                          00003FFF
 _WDT_OFF                          00003FFB
 _WDT_ON                           00003FFF
 _WRT_ENABLE_OFF                   00003DFF
 _WRT_ENABLE_ON                    00003FFF
-_WRT_OFF                          00003DFF
-_WRT_ON                           00003FFF
 _XT_OSC                           00003FFD
-__16F877A                         00000001
+__16F877                          00000001
 aux                               00000027
 contadorCentesima                 00000023
 contadorDecima                    00000024
@@ -1403,9 +1333,11 @@ resNivel                          00000030
 valor                             00000020
 valor1                            00000021
 valor2                            00000022
+MPASM 03.80 Released                            PROYECTO3.ASM   5-8-2023  0:30:28         PAGE 24
 
 
 MEMORY USAGE MAP ('X' = Used,  '-' = Unused)
+
 
 0000 : X----XXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
 0040 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
@@ -1417,22 +1349,16 @@ MEMORY USAGE MAP ('X' = Used,  '-' = Unused)
 01C0 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
 0200 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
 0240 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
-0280 : XXXXXXXXXXXXXXXX XXXX------------ ---------------- ----------------
+0280 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXX-----------
 
 All other memory blocks unused.
 
-Program Memory Words Used:   656
-Program Memory Words Free:  7536
-
-
-MPASM  5.51                     PROYECTO3.ASM   5-7-2023  21:03:51         PAGE 26
-
-
-
+Program Memory Words Used:   689
+Program Memory Words Free:  7503
 
 
 Errors   :     0
 Warnings :     0 reported,     0 suppressed
-Messages :    18 reported,     0 suppressed
+Messages :    22 reported,     0 suppressed
 
 
