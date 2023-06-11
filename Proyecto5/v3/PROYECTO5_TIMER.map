@@ -1,0 +1,71 @@
+MPLINK 4.49, Linker
+Linker Map File - Created Tue Jun 06 21:46:00 2023
+
+                                 Section Info
+                  Section       Type    Address   Location Size(Bytes)
+                ---------  ---------  ---------  ---------  ---------
+                   .org_0       code   0x000000    program   0x000000
+                   .org_1       code   0x000000    program   0x000002
+                   .org_2       code   0x000004    program   0x000002
+                   .org_3       code   0x000005    program   0x00011c
+
+
+
+                              Program Memory Usage 
+                               Start         End      
+                           ---------   ---------      
+                            0x000000    0x000000      
+                            0x000004    0x000092      
+            144 out of 8454 program addresses used, program memory utilization is 1%
+
+
+
+                              Symbols - Sorted by Name
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                     ALTO   0x00007c    program     static D:\carlo\Documentos\FI\8vo Semestre\Micro-computadoras\Microcomputadoras\Proyecto5\v3\PROYECTO5_TIMER.asm
+                    ATRAS   0x000070    program     static D:\carlo\Documentos\FI\8vo Semestre\Micro-computadoras\Microcomputadoras\Proyecto5\v3\PROYECTO5_TIMER.asm
+                   AVANZA   0x00004c    program     static D:\carlo\Documentos\FI\8vo Semestre\Micro-computadoras\Microcomputadoras\Proyecto5\v3\PROYECTO5_TIMER.asm
+                 CUENTA_2   0x000008    program     static D:\carlo\Documentos\FI\8vo Semestre\Micro-computadoras\Microcomputadoras\Proyecto5\v3\PROYECTO5_TIMER.asm
+               DELAY_1SEG   0x000083    program     static D:\carlo\Documentos\FI\8vo Semestre\Micro-computadoras\Microcomputadoras\Proyecto5\v3\PROYECTO5_TIMER.asm
+                  DERECHA   0x000064    program     static D:\carlo\Documentos\FI\8vo Semestre\Micro-computadoras\Microcomputadoras\Proyecto5\v3\PROYECTO5_TIMER.asm
+                   INICIO   0x00000e    program     static D:\carlo\Documentos\FI\8vo Semestre\Micro-computadoras\Microcomputadoras\Proyecto5\v3\PROYECTO5_TIMER.asm
+             INTERRUPCION   0x000005    program     static D:\carlo\Documentos\FI\8vo Semestre\Micro-computadoras\Microcomputadoras\Proyecto5\v3\PROYECTO5_TIMER.asm
+                IZQUIERDA   0x000058    program     static D:\carlo\Documentos\FI\8vo Semestre\Micro-computadoras\Microcomputadoras\Proyecto5\v3\PROYECTO5_TIMER.asm
+                 PRUEBA_A   0x000032    program     static D:\carlo\Documentos\FI\8vo Semestre\Micro-computadoras\Microcomputadoras\Proyecto5\v3\PROYECTO5_TIMER.asm
+                 PRUEBA_D   0x000040    program     static D:\carlo\Documentos\FI\8vo Semestre\Micro-computadoras\Microcomputadoras\Proyecto5\v3\PROYECTO5_TIMER.asm
+                 PRUEBA_S   0x000039    program     static D:\carlo\Documentos\FI\8vo Semestre\Micro-computadoras\Microcomputadoras\Proyecto5\v3\PROYECTO5_TIMER.asm
+                 PRUEBA_V   0x000047    program     static D:\carlo\Documentos\FI\8vo Semestre\Micro-computadoras\Microcomputadoras\Proyecto5\v3\PROYECTO5_TIMER.asm
+                 PRUEBA_W   0x000029    program     static D:\carlo\Documentos\FI\8vo Semestre\Micro-computadoras\Microcomputadoras\Proyecto5\v3\PROYECTO5_TIMER.asm
+              REPITE_1SEG   0x000089    program     static D:\carlo\Documentos\FI\8vo Semestre\Micro-computadoras\Microcomputadoras\Proyecto5\v3\PROYECTO5_TIMER.asm
+                    SALIR   0x000090    program     static D:\carlo\Documentos\FI\8vo Semestre\Micro-computadoras\Microcomputadoras\Proyecto5\v3\PROYECTO5_TIMER.asm
+                  SAL_INT   0x00000b    program     static D:\carlo\Documentos\FI\8vo Semestre\Micro-computadoras\Microcomputadoras\Proyecto5\v3\PROYECTO5_TIMER.asm
+                TRANSMITE   0x00007f    program     static D:\carlo\Documentos\FI\8vo Semestre\Micro-computadoras\Microcomputadoras\Proyecto5\v3\PROYECTO5_TIMER.asm
+               TRANS_INIC   0x00007e    program     static D:\carlo\Documentos\FI\8vo Semestre\Micro-computadoras\Microcomputadoras\Proyecto5\v3\PROYECTO5_TIMER.asm
+
+
+
+                              Symbols - Sorted by Address
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+             INTERRUPCION   0x000005    program     static D:\carlo\Documentos\FI\8vo Semestre\Micro-computadoras\Microcomputadoras\Proyecto5\v3\PROYECTO5_TIMER.asm
+                 CUENTA_2   0x000008    program     static D:\carlo\Documentos\FI\8vo Semestre\Micro-computadoras\Microcomputadoras\Proyecto5\v3\PROYECTO5_TIMER.asm
+                  SAL_INT   0x00000b    program     static D:\carlo\Documentos\FI\8vo Semestre\Micro-computadoras\Microcomputadoras\Proyecto5\v3\PROYECTO5_TIMER.asm
+                   INICIO   0x00000e    program     static D:\carlo\Documentos\FI\8vo Semestre\Micro-computadoras\Microcomputadoras\Proyecto5\v3\PROYECTO5_TIMER.asm
+                 PRUEBA_W   0x000029    program     static D:\carlo\Documentos\FI\8vo Semestre\Micro-computadoras\Microcomputadoras\Proyecto5\v3\PROYECTO5_TIMER.asm
+                 PRUEBA_A   0x000032    program     static D:\carlo\Documentos\FI\8vo Semestre\Micro-computadoras\Microcomputadoras\Proyecto5\v3\PROYECTO5_TIMER.asm
+                 PRUEBA_S   0x000039    program     static D:\carlo\Documentos\FI\8vo Semestre\Micro-computadoras\Microcomputadoras\Proyecto5\v3\PROYECTO5_TIMER.asm
+                 PRUEBA_D   0x000040    program     static D:\carlo\Documentos\FI\8vo Semestre\Micro-computadoras\Microcomputadoras\Proyecto5\v3\PROYECTO5_TIMER.asm
+                 PRUEBA_V   0x000047    program     static D:\carlo\Documentos\FI\8vo Semestre\Micro-computadoras\Microcomputadoras\Proyecto5\v3\PROYECTO5_TIMER.asm
+                   AVANZA   0x00004c    program     static D:\carlo\Documentos\FI\8vo Semestre\Micro-computadoras\Microcomputadoras\Proyecto5\v3\PROYECTO5_TIMER.asm
+                IZQUIERDA   0x000058    program     static D:\carlo\Documentos\FI\8vo Semestre\Micro-computadoras\Microcomputadoras\Proyecto5\v3\PROYECTO5_TIMER.asm
+                  DERECHA   0x000064    program     static D:\carlo\Documentos\FI\8vo Semestre\Micro-computadoras\Microcomputadoras\Proyecto5\v3\PROYECTO5_TIMER.asm
+                    ATRAS   0x000070    program     static D:\carlo\Documentos\FI\8vo Semestre\Micro-computadoras\Microcomputadoras\Proyecto5\v3\PROYECTO5_TIMER.asm
+                     ALTO   0x00007c    program     static D:\carlo\Documentos\FI\8vo Semestre\Micro-computadoras\Microcomputadoras\Proyecto5\v3\PROYECTO5_TIMER.asm
+               TRANS_INIC   0x00007e    program     static D:\carlo\Documentos\FI\8vo Semestre\Micro-computadoras\Microcomputadoras\Proyecto5\v3\PROYECTO5_TIMER.asm
+                TRANSMITE   0x00007f    program     static D:\carlo\Documentos\FI\8vo Semestre\Micro-computadoras\Microcomputadoras\Proyecto5\v3\PROYECTO5_TIMER.asm
+               DELAY_1SEG   0x000083    program     static D:\carlo\Documentos\FI\8vo Semestre\Micro-computadoras\Microcomputadoras\Proyecto5\v3\PROYECTO5_TIMER.asm
+              REPITE_1SEG   0x000089    program     static D:\carlo\Documentos\FI\8vo Semestre\Micro-computadoras\Microcomputadoras\Proyecto5\v3\PROYECTO5_TIMER.asm
+                    SALIR   0x000090    program     static D:\carlo\Documentos\FI\8vo Semestre\Micro-computadoras\Microcomputadoras\Proyecto5\v3\PROYECTO5_TIMER.asm
+
+

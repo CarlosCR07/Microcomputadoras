@@ -1,0 +1,67 @@
+MPLINK 4.49, Linker
+Linker Map File - Created Tue Jun 06 21:19:28 2023
+
+                                 Section Info
+                  Section       Type    Address   Location Size(Bytes)
+                ---------  ---------  ---------  ---------  ---------
+                   .org_0       code   0x000000    program   0x000000
+                   .org_1       code   0x000000    program   0x000002
+                   .org_2       code   0x000004    program   0x000002
+                   .org_3       code   0x000005    program   0x0000ca
+
+
+
+                              Program Memory Usage 
+                               Start         End      
+                           ---------   ---------      
+                            0x000000    0x000000      
+                            0x000004    0x000069      
+            103 out of 8454 program addresses used, program memory utilization is 1%
+
+
+
+                              Symbols - Sorted by Name
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                 ADELANTE   0x000033    program     static D:\carlo\Documentos\FI\8vo Semestre\Micro-computadoras\Microcomputadoras\Proyecto5\proyecto5.asm
+                    ATRAS   0x000041    program     static D:\carlo\Documentos\FI\8vo Semestre\Micro-computadoras\Microcomputadoras\Proyecto5\proyecto5.asm
+                  DERECHA   0x000037    program     static D:\carlo\Documentos\FI\8vo Semestre\Micro-computadoras\Microcomputadoras\Proyecto5\proyecto5.asm
+                  ES_CERO   0x00004c    program     static D:\carlo\Documentos\FI\8vo Semestre\Micro-computadoras\Microcomputadoras\Proyecto5\proyecto5.asm
+                   ES_UNO   0x000049    program     static D:\carlo\Documentos\FI\8vo Semestre\Micro-computadoras\Microcomputadoras\Proyecto5\proyecto5.asm
+                   INICIO   0x000005    program     static D:\carlo\Documentos\FI\8vo Semestre\Micro-computadoras\Microcomputadoras\Proyecto5\proyecto5.asm
+           INTERRUPCIONES   0x000060    program     static D:\carlo\Documentos\FI\8vo Semestre\Micro-computadoras\Microcomputadoras\Proyecto5\proyecto5.asm
+                IZQUIERDA   0x00003d    program     static D:\carlo\Documentos\FI\8vo Semestre\Micro-computadoras\Microcomputadoras\Proyecto5\proyecto5.asm
+                    PARAR   0x00003b    program     static D:\carlo\Documentos\FI\8vo Semestre\Micro-computadoras\Microcomputadoras\Proyecto5\proyecto5.asm
+                   RECIBE   0x00001c    program     static D:\carlo\Documentos\FI\8vo Semestre\Micro-computadoras\Microcomputadoras\Proyecto5\proyecto5.asm
+                  RETARDO   0x000053    program     static D:\carlo\Documentos\FI\8vo Semestre\Micro-computadoras\Microcomputadoras\Proyecto5\proyecto5.asm
+                  SAL_INT   0x000068    program     static D:\carlo\Documentos\FI\8vo Semestre\Micro-computadoras\Microcomputadoras\Proyecto5\proyecto5.asm
+          SAL_NO_FUE_TMR1   0x000069    program     static D:\carlo\Documentos\FI\8vo Semestre\Micro-computadoras\Microcomputadoras\Proyecto5\proyecto5.asm
+                 TRASMITE   0x00004e    program     static D:\carlo\Documentos\FI\8vo Semestre\Micro-computadoras\Microcomputadoras\Proyecto5\proyecto5.asm
+                    dosA1   0x000057    program     static D:\carlo\Documentos\FI\8vo Semestre\Micro-computadoras\Microcomputadoras\Proyecto5\proyecto5.asm
+                   tresA1   0x000055    program     static D:\carlo\Documentos\FI\8vo Semestre\Micro-computadoras\Microcomputadoras\Proyecto5\proyecto5.asm
+                    unoA1   0x000059    program     static D:\carlo\Documentos\FI\8vo Semestre\Micro-computadoras\Microcomputadoras\Proyecto5\proyecto5.asm
+
+
+
+                              Symbols - Sorted by Address
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                   INICIO   0x000005    program     static D:\carlo\Documentos\FI\8vo Semestre\Micro-computadoras\Microcomputadoras\Proyecto5\proyecto5.asm
+                   RECIBE   0x00001c    program     static D:\carlo\Documentos\FI\8vo Semestre\Micro-computadoras\Microcomputadoras\Proyecto5\proyecto5.asm
+                 ADELANTE   0x000033    program     static D:\carlo\Documentos\FI\8vo Semestre\Micro-computadoras\Microcomputadoras\Proyecto5\proyecto5.asm
+                  DERECHA   0x000037    program     static D:\carlo\Documentos\FI\8vo Semestre\Micro-computadoras\Microcomputadoras\Proyecto5\proyecto5.asm
+                    PARAR   0x00003b    program     static D:\carlo\Documentos\FI\8vo Semestre\Micro-computadoras\Microcomputadoras\Proyecto5\proyecto5.asm
+                IZQUIERDA   0x00003d    program     static D:\carlo\Documentos\FI\8vo Semestre\Micro-computadoras\Microcomputadoras\Proyecto5\proyecto5.asm
+                    ATRAS   0x000041    program     static D:\carlo\Documentos\FI\8vo Semestre\Micro-computadoras\Microcomputadoras\Proyecto5\proyecto5.asm
+                   ES_UNO   0x000049    program     static D:\carlo\Documentos\FI\8vo Semestre\Micro-computadoras\Microcomputadoras\Proyecto5\proyecto5.asm
+                  ES_CERO   0x00004c    program     static D:\carlo\Documentos\FI\8vo Semestre\Micro-computadoras\Microcomputadoras\Proyecto5\proyecto5.asm
+                 TRASMITE   0x00004e    program     static D:\carlo\Documentos\FI\8vo Semestre\Micro-computadoras\Microcomputadoras\Proyecto5\proyecto5.asm
+                  RETARDO   0x000053    program     static D:\carlo\Documentos\FI\8vo Semestre\Micro-computadoras\Microcomputadoras\Proyecto5\proyecto5.asm
+                   tresA1   0x000055    program     static D:\carlo\Documentos\FI\8vo Semestre\Micro-computadoras\Microcomputadoras\Proyecto5\proyecto5.asm
+                    dosA1   0x000057    program     static D:\carlo\Documentos\FI\8vo Semestre\Micro-computadoras\Microcomputadoras\Proyecto5\proyecto5.asm
+                    unoA1   0x000059    program     static D:\carlo\Documentos\FI\8vo Semestre\Micro-computadoras\Microcomputadoras\Proyecto5\proyecto5.asm
+           INTERRUPCIONES   0x000060    program     static D:\carlo\Documentos\FI\8vo Semestre\Micro-computadoras\Microcomputadoras\Proyecto5\proyecto5.asm
+                  SAL_INT   0x000068    program     static D:\carlo\Documentos\FI\8vo Semestre\Micro-computadoras\Microcomputadoras\Proyecto5\proyecto5.asm
+          SAL_NO_FUE_TMR1   0x000069    program     static D:\carlo\Documentos\FI\8vo Semestre\Micro-computadoras\Microcomputadoras\Proyecto5\proyecto5.asm
+
+

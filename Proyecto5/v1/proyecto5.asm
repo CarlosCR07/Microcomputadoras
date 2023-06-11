@@ -1,0 +1,151 @@
+		PROCESSOR 16F877
+		INCLUDE <P16F877.INC>	
+
+valor1 equ h'21'
+valor2 equ h'22'
+valor3 equ h'23'
+cte1A1 equ .1
+cte2A1 equ .13
+cte3A1 equ .255	
+ContadorTimer equ h'24'		
+
+			ORG 0 			;Vector de reset
+			GOTO INICIO
+
+			ORG 4				;Vector de Interrupciones
+			GOTO INTERRUPCIONES	
+
+			ORG 5
+INICIO: 	BSF STATUS,RP0		;ACCCEDEMOS BANCO 1
+			BCF STATUS,RP1
+			BSF TXSTA,BRGH		;TASA DE TRANSMISION ALTA
+			MOVLW D'129'		;TASA DE TRANSMISION DE 9600 Bauds
+			MOVWF SPBRG			;SPBRG<- D'129'
+			BCF TXSTA,SYNC		;Habiitamos modo asincrono		
+			BSF TXSTA,TXEN		;Habilitamos 
+			CLRF TRISD			;Configuramos PORTD como salida
+			CLRF TRISB			;Configuramos PORTB como salida
+			
+		;Nuevo
+			BSF PIE1, TMR1IE	;Modo Timer1
+
+			BCF STATUS,RP0		;Regresamos al banco 0
+			CLRF PORTD			;Limpiamos el PORTD
+			CLRF PORTB			;Limpiamos el PORTB
+			BSF RCSTA,SPEN		;Habilitamos el puerto serie
+			BSF RCSTA,CREN		;Habilitamos la recepciónc continua en la comunicacion asincrona
+		
+		;Nuevo
+			MOVLW B'00110001'
+			MOVWF T1CON
+			BCF INTCON, TMR1IF	;Habilita interrupción timer1
+			BSF INTCON, PEIE	;Habilita interrupcones 2 bloque
+			BSF INTCON, GIE		;Habilita interrupciones generales
+			CLRF TMR1H
+			CLRF TMR1L
+			CLRF ContadorTimer
+
+
+RECIBE:		BTFSS PIR1,RCIF		;¿PIR1.RC1F==1? ESPERAMOS A QUE SE RECIBA UN DATO
+			GOTO RECIBE			;NO, SIGUE A LA ESPERA DE LA RECEPCION
+			MOVF RCREG,W		;SI, OBTEN EL DATO LEÍDO Y ALMACENALO EN W
+			;MOVWF TXREG		;MOVEMOS EL DATO LEÍDO AL REGISTRO DE TRANSMISION
+			MOVLW "A" ;CÓDIGO ASCII DEL W
+			XORWF RCREG,W
+			BTFSC STATUS,Z
+			GOTO ADELANTE
+		
+			MOVLW "D" ;CÓDIGO ASCII DEL A
+			XORWF RCREG,W
+			BTFSC STATUS,Z
+			GOTO DERECHA
+		
+			MOVLW "S" ;CÓDIGO ASCII DEL Q
+			XORWF RCREG,W
+			BTFSC STATUS,Z
+			GOTO PARAR
+		
+			MOVLW "I" ;CÓDIGO ASCII DEL D
+			XORWF RCREG,W
+			BTFSC STATUS,Z
+			GOTO IZQUIERDA
+			
+			MOVLW "T" ;CÓDIGO ASCII DEL S
+			XORWF RCREG,W
+			BTFSC STATUS,Z
+			GOTO ATRAS
+
+ADELANTE ;HACIA ADELANTE
+			MOVLW B'1010'; M1=DERECHA M2=DERECHA
+			MOVWF PORTB
+			CALL RETARDO
+			GOTO RECIBE
+DERECHA ;HACIA LA DERECHA
+			MOVLW B'1001' ;M1=DERECHA M2=IZQUIERDA
+			MOVWF PORTB
+			CALL RETARDO
+			GOTO RECIBE
+PARAR ;PARA
+			CLRF PORTB
+			GOTO RECIBE
+IZQUIERDA 	;HACIA LA IZQUIERDA 
+			MOVLW B'0110' ;M1=IZQUIERDA M2=DERCHA
+			MOVWF PORTB
+			CALL RETARDO
+			GOTO RECIBE
+ATRAS:		MOVLW B'0101'  ;M1=IZQUIERDA M2=IZQUIERDA
+			MOVWF PORTB
+			CALL RETARDO  
+			GOTO RECIBE		
+
+		
+
+			SUBLW "1"
+			BTFSS STATUS,Z		; ¿STATUS.Z==1?
+			GOTO ES_CERO		;NO
+			GOTO ES_UNO			;SI
+
+ES_UNO:	 	BSF PORTD,0			;NO PORTD.0<-1
+			CALL RETARDO
+			GOTO RECIBE
+ES_CERO:	BCF PORTD,0			;PORTD.0<- 0
+			GOTO RECIBE
+TRASMITE:	BSF STATUS,RP0		;Cambiamos al banco 1
+			BTFSS TXSTA,TRMT	;¿TXSTA.TRMT? Se concluyó la transmision del dato?
+			GOTO TRASMITE		;NO, sigue a la espera de la transmision
+			BCF STATUS,RP0		;SI, regresa al banco 0
+			GOTO RECIBE			;Ve a RECIBE
+
+RETARDO:	MOVLW cte1A1		;SUBRUTINA DE RETARDO DE 2ms
+			MOVWF valor1
+
+tresA1 		MOVLW cte2A1
+			MOVWF valor2
+
+dosA1 		MOVLW cte3A1
+			MOVWF valor3
+
+unoA1	 	DECFSZ valor3
+			GOTO unoA1
+			DECFSZ valor2
+			GOTO dosA1
+			DECFSZ valor1
+			GOTO tresA1
+			RETURN
+
+;Nuevo
+INTERRUPCIONES: BTFSS PIR1,TMR1IF		;Pregunta bandera interrupción
+				GOTO SAL_NO_FUE_TMR1	
+				INCF ContadorTimer
+				MOVLW D'859'			;859 = 90 segundos
+				SUBWF ContadorTimer,W	
+				BTFSS STATUS, Z			;¿Ha transcurrido 90 segundos?
+				GOTO SAL_INT			;No
+				BCF RCSTA,CREN			;Deshabilitamos recepción de datos
+
+SAL_INT: BCF PIR1, TMR1IF
+SAL_NO_FUE_TMR1: RETFIE
+
+	END
+				
+			
