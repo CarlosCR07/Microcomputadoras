@@ -1,0 +1,112 @@
+004-005 @WRITE_PROGRAM_MEMORY8.P1
+004-005 @READ_PROGRAM_MEMORY8.P2
+008     PSP_DATA
+015     CCP_1
+015     CCP_1_LOW
+016     CCP_1_HIGH
+01B     CCP_2_LOW
+01B     CCP_2
+01C     CCP_2_HIGH
+020     @TRIS_C
+021     LCD_ADDR
+022     lcd_total_rows
+023     lcd_total_columns
+024     new_row_request
+025     BACKLIGHT_LED
+026     lcd_gotoxy.data
+027     selection
+028     control
+029     contador
+02A-02B @sprintf_string
+02C     lcd_init.addr
+02C     @PSTRINGC7_670.@SCRATCH1
+02D     lcd_init.col
+02D     @PSTRINGC7_670.@SCRATCH2
+02E     lcd_init.row
+02E     @PSTRINGC7_670.@SCRATCH3
+02F     lcd_init.i
+02F     LCD_PUTC.in_data
+02F     @PSTRINGC7_670.@SCRATCH4
+030     lcd_gotoxy.x
+030     @delay_ms1.P1
+030     lcd_init.@SCRATCH1
+031     lcd_gotoxy.y
+032     lcd_gotoxy.row
+033     lcd_gotoxy.column
+034     lcd_gotoxy.row_addr
+035     lcd_gotoxy.lcd_address
+036     lcd_gotoxy.@SCRATCH1
+037     lcd_send_byte.data
+038     lcd_send_byte.type
+039     lcd_send_byte.@SCRATCH1
+03A     i2c_send_nibble.data
+03B     i2c_send_nibble.type
+03C     i2c_send_nibble.@SCRATCH1
+03D     @I2C_WRITEU_1.P1
+077     @SCRATCH
+078     @SCRATCH
+078     _RETURN_
+079     @SCRATCH
+07A     @SCRATCH
+10D-10E @READ_PROGRAM_MEMORY8.P1
+10D-10E @WRITE_PROGRAM_MEMORY8.P2
+
+ROM Allocation:
+000004  LCD_INIT_STRING.call
+000008  LCD_INIT_STRING.data
+00000C  @const681.call
+000011  @const687.call
+000016  @const688.call
+00001B  @const689.call
+000021  @const690.call
+000026  @delay_ms1
+00003A  @I2C_WRITEU_1
+00004A  i2c_send_nibble
+00009A  lcd_send_byte
+0000B8  lcd_clear
+0000C2  lcd_init
+00010E  escribir_i2c
+000121  lcd_gotoxy
+000158  LCD_PUTC
+00017D  @PSTRINGC7_670
+0001D3  cambioEstado
+000225  MAIN
+000225  @cinit1
+000254  @cinit2
+
+Project Directory:
+    D:\carlo\Documentos\FI\8vo Semestre\Micro-computadoras\Microcomputadoras\ProyectoFinal\p6\
+
+Project Files:
+    proyecto6.c                                             [19-jun.-23 20:10  CRC=67781730]
+    ..\..\..\..\..\..\..\..\Archivos de programa\CSS\Devices\16F877.h [15-ene.-18 15:53  CRC=EE78BE53]
+    ..\..\..\..\..\..\..\..\Archivos de programa\CSS\Drivers\i2c_Flex_LCD.c [13-jun.-23 22:30  CRC=16AFB211]
+
+Source signature=835039A5
+Program memory checksum=0000
+Program memory CRC=0000
+Hex file CRC=EC2A
+
+Units:
+    proyecto6 (main)
+
+Compiler Settings:
+    Processor:      PIC16F877
+    Pointer Size:   16
+    ADC Range:      0-255
+    Opt Level:      9
+    Short,Int,Long: UNSIGNED: 1,8,16
+    Float,Double:   32,32
+    Compile Mode:       CCS5
+
+Output Files:
+    XREF file:   proyecto6.xsym
+    Errors:      proyecto6.err
+    Ext Symbols: proyecto6.esym
+    INHX8:       proyecto6.hex
+    Symbols:     proyecto6.sym
+    List:        proyecto6.lst
+    Debug/COFF:  proyecto6.cof
+    Project:     proyecto6.ccspjt
+    Call Tree:   proyecto6.tre
+    Statistics:  proyecto6.STA

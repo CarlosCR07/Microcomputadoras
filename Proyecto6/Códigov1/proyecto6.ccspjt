@@ -1,0 +1,41 @@
+[PROJECT]
+Target=proyecto6.hex
+Processor_Text=PIC16F877
+CCSVersion=5.076
+Compiler=PCM
+[Target Data]
+FileList=proyecto6.c
+[proyecto6.c]
+Type=4
+[mru-list]
+1=proyecto6.c
+
+[defines]
+buildcount=4
+
+[ProjectLog]
+Days=2
+D1=14-06-2023
+D1_L=1
+D1_L1=[4877]Project Closed.
+D2=16-06-2023
+D2_L=4
+D2_L1=[42360]Project Opened.
+D2_L2=[43589]Project Closed.
+D2_L3=[43599]Project Opened.
+D2_L4=[43627]Project Closed.
+
+[fileformats]
+forcecoff=0
+
+[Opened Files]
+1=proyecto6.c
+t1=1
+2=..\v2\proyecto6.c
+t2=57
+Count=3
+3=..\v3\proyecto6.c
+t3=57
+[Units]
+Count=1
+1=proyecto6 (main)

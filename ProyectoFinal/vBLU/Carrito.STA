@@ -1,0 +1,55 @@
+
+ROM used:   369/8192 (5%)
+            2049/8192 (25%) including unused fragments
+
+            0.4 Average locations per line
+            2.4 Average locations per statement
+
+RAM used:   25/368 (7%) at main() level
+            27/368 (7%) worst case
+
+Stack used: 2 worst case (0 in main + 2 for interrupts)
+Stack size: 8
+
+Lines Stmts  %   Files
+----- ----- ---  -----
+  147    77  50  Carrito.c
+  652     0   0  ..\..\..\..\..\..\..\..\Archivos de programa\CSS\Devices\16F877.h
+  211    77  50  ..\..\..\..\..\..\..\..\Archivos de programa\CSS\Drivers\i2c_Flex_LCD.c
+----- -----
+ 1010   154 Total
+
+Page ROM  %  RAM    Vol Diff  Functions:
+---- --- --- ---    --- ----  ----------
+0     20   5    1             @delay_ms1
+3      1   0    0      5  1.0  loader16F877
+0     61  17    0    576  4.8  direcCarro
+0     79  21    0    193  3.1  MAIN
+0    126  34    0    941  4.4  movMotores
+0     33   9    0    209  3.9  cambioVelocidad
+ Inline         0             @cinit1
+
+Program metrics:
+    Functions               5
+    Statements              154
+    Comments                251
+    Volume (V)              2563
+    Difficulty (D)          17.2
+    Effort to implement (E) 44165
+    Time to implement (T)   41 minutes
+    Est Delivered Bugs (B)  0
+    Cyclomatic Complexity   20
+    Maintainability (MI)    32
+
+ Segment     Used  Free
+-----------  ----  ----
+00000-00003     4  0  
+00004-00030    45  0  
+00031-007FF   319  1680  
+00800-00FFF     0  2048  
+01000-017FF     0  2048  
+01800-01EFF     0  1792  
+01F00-01FFF     1  255  
+
+
+

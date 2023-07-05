@@ -1,0 +1,5 @@
+Compiling D:\carlo\Documentos\FI\8vo Semestre\Micro-computadoras\Microcomputadoras\Proyecto6\Códigov1\proyecto6 on 16-jun.-23 at 12:06
+>>> Warning 202 "D:\Archivos de programa\CSS\Drivers\i2c_Flex_LCD.c" Line 174(13,17): Variable never used:   data
+      Memory usage:   ROM=8%      RAM=4% - 9%
+      0 Errors,  1 Warnings.
+Build Successful.

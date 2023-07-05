@@ -1,0 +1,9 @@
+ÀÄCarrito
+   ÃÄMAIN  0/79  Ram=0
+   ³  ÃÄ@cinit1  (Inline)  Ram=0
+   ³  ÃÄmovMotores  0/126  Ram=0
+   ³  ÀÄcambioVelocidad  0/33  Ram=0
+   ³     ÀÄ@delay_ms1  0/20  Ram=1
+   ÃÄloader16F877  3/1  Ram=0
+   ÀÄdirecCarro  0/61  Ram=0
+      ÀÄ@delay_ms1  0/20  Ram=1

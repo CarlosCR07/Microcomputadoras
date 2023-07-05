@@ -1,0 +1,6 @@
+Compiling D:\carlo\Documentos\FI\8vo Semestre\Micro-computadoras\Microcomputadoras\ProyectoFinal\vReducida\Carrito on 19-jun.-23 at 23:17
+>>> Warning 216 "Carrito.c" Line 172(1,2): Interrupts disabled during call to prevent re-entrancy:  (@delay_ms1)
+>>> Warning 202 "D:\Archivos de programa\CSS\Drivers\i2c_Flex_LCD.c" Line 174(13,17): Variable never used:   data
+      Memory usage:   ROM=13%      RAM=8% - 14%
+      0 Errors,  2 Warnings.
+Build Successful.

@@ -1,0 +1,39 @@
+[PROJECT]
+Target=Carrito.hex
+Processor_Text=PIC16F877
+CCSVersion=5.076
+Compiler=PCM
+[Target Data]
+FileList=Carrito.c
+[Carrito.c]
+Type=4
+[mru-list]
+1=Carrito.c
+
+[defines]
+buildcount=5
+
+[Opened Files]
+1=Carrito.c
+t1=120
+Count=2
+2=..\..\..\..\..\..\..\..\Archivos de programa\CSS\Drivers\i2c_Flex_LCD.c
+t2=164
+
+[ProjectLog]
+Days=2
+D1=20-06-2023
+D1_L=3
+D1_L1=[11504]Project Closed.
+D1_L2=[11512]Project Opened.
+D1_L3=[12058]Project Closed.
+D2=27-06-2023
+D2_L=2
+D2_L1=[65591]Project Opened.
+D2_L2=[66173]Project Closed.
+
+[fileformats]
+forcecoff=0
+[Units]
+Count=1
+1=Carrito (main)

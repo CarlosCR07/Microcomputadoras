@@ -1,0 +1,50 @@
+
+ROM used:   219/8192 (3%)
+            219/8192 (3%) including unused fragments
+
+            0.2 Average locations per line
+            1.5 Average locations per statement
+
+RAM used:   16/368 (4%) at main() level
+            17/368 (5%) worst case
+
+Stack used: 0 worst case (0 in main + 0 for interrupts)
+Stack size: 8
+
+Lines Stmts  %   Files
+----- ----- ---  -----
+  131    65  46  proyecto6.c
+  652     0   0  ..\..\..\..\..\..\..\..\Archivos de programa\CSS\Devices\16F877.h
+  211    77  54  ..\..\..\..\..\..\..\..\Archivos de programa\CSS\Drivers\i2c_Flex_LCD.c
+----- -----
+  994   142 Total
+
+Page ROM  %  RAM    Vol Diff  Functions:
+---- --- --- ---    --- ----  ----------
+0     20   9    1             @delay_ms1
+0    152  69    1    959  4.9  MAIN
+0     43  20    0    285  4.1  cambioEstado
+ Inline         0             @cinit1
+
+Program metrics:
+    Functions               2
+    Statements              142
+    Comments                242
+    Volume (V)              1428
+    Difficulty (D)          8.9
+    Effort to implement (E) 12662
+    Time to implement (T)   12 minutes
+    Est Delivered Bugs (B)  0
+    Cyclomatic Complexity   11
+    Maintainability (MI)    18
+
+ Segment     Used  Free
+-----------  ----  ----
+00000-00003     4  0  
+00004-007FF   215  1829  
+00800-00FFF     0  2048  
+01000-017FF     0  2048  
+01800-01FFF     0  2048  
+
+
+
